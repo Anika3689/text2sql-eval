@@ -4,18 +4,23 @@ import sqlglot
 from sqlglot.expressions import Identifier, Table
 from utils.deserialize_db_model import deserialize_db_schema_model
 from datasets import Dataset, DatasetDict
+from data.prompt_with_json_response import prompt
+import json
+import csv
 
 from canonicalized_data_format.ddl_objects import DBSchemaModel
 
 
 class PrepareModelInput:
 
-    def __init__(self, arch : str, dataSource : Dataset, normalized_db_schemas):
+    def __init__(self, arch : str, dataSource : Dataset, normalized_db_schemas, descriptions):
 
         if isinstance(normalized_db_schemas, str):
             normalized_db_schemas = deserialize_db_schema_model(normalized_db_schemas)
         self.dataSource = dataSource
+        #Mapping of db_id : Schema representations
         self.normalized_db_schemas = normalized_db_schemas
+        self.descriptions = descriptions
         self.prepare_based_on_architecture(arch)
 
     def prepare_based_on_architecture(self, arch : str):
@@ -43,35 +48,41 @@ class PrepareModelInput:
         identifiers = extract_identifiers_from_schema(current_db_schema)
         postgres_sql_gold = convert_to_postgresql(example['query'])
         postgres_sql_gold = quote_postgres_identifiers(postgres_sql_gold, identifiers)
+        gold_response = get_expected_response(postgres_sql_gold, self.descriptions.get(example['question'], ''), '')
 
         formatted_sample = {
             "text": (
                 "<|begin_of_text|>"
                 "<|start_header_id|>system<|end_header_id|>\n\n"
-                "You are an advanced SQL Assistant created by Infoworks, specializing in generating precise PostgreSQL queries from user inputs and provided database schema. "
-                "Your design eliminates the need for prior database schema knowledge, offering a seamless experience in SQL query creation. You have 2 core functions:\n"
-                "### Core Functions:\n"
-                "- **Query Generation:** Transform user inputs into syntactically correct SQL queries. Ensure each query adheres to strict syntax and logic validation against the provided schema and also strictly adheres to performance guidelines given below.\n"
-                "  - **Golden SQL:** If golden sql is part of the user provided context evaluate if the same can be used to answer the question if yes respond with the golden sql.\n"
-                "  - **Focus:** Your primary role is SQL query generation. Avoid engaging in unrelated tasks such as web searches, math, joke, code writing, poetry, or general knowledge queries.\n"
-                "  - **Schema Dependence:** Rely solely on user-provided schemas for query generation. Assume necessary details about formulas, column values, and join criteria as needed.\n"
-                "  - **Professionalism:** Assist users in improving SQL query efficiency and accuracy while maintaining a professional demeanor.\n"
-                "  - **Precision in Query Generation:** Validate each query to ensure alignment with user inputs and specified schema requirements. And make sure you quote all entities like tables and columns in the generated SQL using double quotes \"\" as per PostgreSQL conventions.\n"
-                "  - **Optimization:** Prioritize returning the most informative data. Avoid querying all columns, query only the necessary ones, minimize the use of subqueries, use CTEs for readability, leverage window functions for advanced data analysis over self-joins, and consider the cost of data movement across warehouses. Use clustering keys to improve query performance by optimizing how data is stored and accessed in PostgreSQL, reduce the volume of data being processed by filtering early, reduce the number of query operations, use sorts only when necessary, avoid joins with an OR condition.\n"
-                "  - **Attention to Detail:** Use the `current_date` function for current date queries. Double-check the PostgreSQL query for common errors, ensuring data type correctness, proper quoting of identifiers, correct function arguments usage, and PostgreSQL features such as using `quote_ident()` for dynamic referencing and employing `TRY_CAST()` for safe type conversion.\n"
+                f"{prompt}"
                 "<|eot_id|>"
                 "<|start_header_id|>user<|end_header_id|>\n\n"
                 f"### Database Schema\n{schema_ddl}\n\n"
                 f"### Input\n{example['question']}"
                 "<|eot_id|>"
                 "<|start_header_id|>assistant<|end_header_id|>\n\n"
-                f"{postgres_sql_gold}"
+                f"{gold_response}"
                 "<|eot_id|>"
             )
         }
-
-
         return formatted_sample
+
+def get_expected_response(gold_sql, description, suggestions, follow_up_questions=None):
+    if follow_up_questions is None:
+        follow_up_questions = []
+
+    response = {
+        "response_code": "IWX-AI-SUCCESS-001",
+        "sql_query": gold_sql,
+        "description": description,
+        "follow_up_questions": follow_up_questions
+    }
+
+    if suggestions.strip():
+        response["suggestions"] = suggestions
+
+    return json.dumps(response, ensure_ascii=False)
+
 
 def extract_identifiers_from_schema(schema_obj : DBSchemaModel) -> set[str]:
     quoted_identifiers = []
@@ -105,16 +116,24 @@ def quote_postgres_identifiers(sql: str, schema_identifiers: set[str]) -> str:
             node.set("quoted", True)
     return ast.sql(dialect='postgres')
 
-
+def load_qna_dict(csv_file, question_col="question", description_col="description"):
+    qna_dict = {}
+    with open(csv_file, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            print(row[description_col])
+            qna_dict[row[question_col]] = row[description_col]
+    return qna_dict
 
 if __name__ == '__main__':
-    testing = True
     path_interim_db_schemas = '/Users/anikaraghavan/Downloads/text2sql-eval/data/spider/interim_db_schemas_object'
-    #if not testing:
     df = pd.read_csv('data/spider/datasets_original/train_dataset.csv')
     dataSource = Dataset.from_pandas(df)
 
-    dataprocessor = PrepareModelInput('decoder-only', dataSource, path_interim_db_schemas)
-    formatted_dataset = dataprocessor.prepared_dataset
-    with open('data/spider/ps_train_formatted_chat_template.jsonl', 'wb') as output_file:
-        formatted_dataset.to_json(output_file, orient='records')
+    # Example usage
+    qna = load_qna_dict("data/train_with_descriptions.csv")
+
+    # dataprocessor = PrepareModelInput('decoder-only', dataSource, path_interim_db_schemas, qna)
+    # formatted_dataset = dataprocessor.prepared_dataset
+    # with open('data/spider/ps_train_formatted_descriptions.jsonl', 'wb') as output_file:
+    #     formatted_dataset.to_json(output_file, orient='records')

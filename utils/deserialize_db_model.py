@@ -12,7 +12,14 @@ def deserialize_db_schema_model(load_path : str) -> dict[str : DBSchemaModel]:
 
 if __name__ == '__main__':
 
-    load_path = '/Users/anikaraghavan/Downloads/spider/data/spider/interim_db_schemas_object'
+    load_path = '/Users/anikaraghavan/Downloads/text2sql-eval/data/spider/interim_db_schemas_object'
     db_schemas = deserialize_db_schema_model(load_path)
     print(len(db_schemas))
+    
+    # db_string_reps = {}
+    # for db in db_schemas:
+    #     schema = db_schemas[db]
+    #     db_string_reps[db] = {"ddl_string" : schema.get_ddl_string(), "schema_complexity": schema.get_db_schema_complexity()}
 
+    # with open('db_schemas_with_complexity.json', 'w') as f:
+    #     json.dump(db_string_reps, f, indent=2)

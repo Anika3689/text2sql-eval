@@ -74,7 +74,7 @@ def evaluate_execution(samples, db_dir):
     for s in samples:
         db_path = f"{db_dir}/{s['db_id']}/{s['db_id']}.sqlite"
 
-        gold_query, pred_query = s["gold"].lower(), s["pred"].lower()
+        gold_query, pred_query = s["gold"], s["pred"]
         gold_df, gold_err = execute_query(db_path, gold_query)
         pred_df, pred_err = execute_query(db_path, pred_query)
 
@@ -100,15 +100,16 @@ def evaluate_execution(samples, db_dir):
     return accuracy, results
 
 
+if __name__ == '__main__':
 
-samples = [
-    {
-        "db_id": "college_1",
-        "gold": "SELECT STU_LNAME AS l_name, STU_FNAME FROM student WHERE PROF_NUM > 300 ORDER BY STU_LNAME DESC",
-        "pred": "SELECT STU_FNAME, STU_LNAME FROM student WHERE PROF_NUM > 300 ORDER BY STU_LNAME DESC"
-    },
-]
+    samples = [
+        {
+            "db_id": "college_1",
+            "gold": "SELECT STU_LNAME AS l_name, STU_FNAME FROM student WHERE PROF_NUM > 300 ORDER BY STU_LNAME DESC",
+            "pred": "SELECT STU_FNAME, STU_LNAME FROM student WHERE PROF_NUM > 300 ORDER BY STU_LNAME DESC"
+        },
+    ]
 
-accuracy, results = evaluate_execution(samples, '/Users/anikaraghavan/Downloads/text2sql-eval/data/spider/database_files')
-print(accuracy)
-print(results)
+    accuracy, results = evaluate_execution(samples, '/Users/anikaraghavan/Downloads/text2sql-eval/data/spider/database_files')
+    print(accuracy)
+    print(results)

@@ -77,6 +77,10 @@ class DBSchemaModel:
                 result.append(f"  - {src_table}.{src_col} → {tgt_table}.{tgt_col}")
         return "\n".join(result)
 
-    def get_db_schema_complexity():
-            """This affects how much schema context the model must consider"""
-            pass
+    def get_db_schema_complexity(self):
+        """Returns the total number of attributes of all tables in schema, and num FKeys"""
+        totalNumAttributes = 0
+        for table in self.tables:
+            totalNumAttributes += len(table.attributes)
+        
+        return totalNumAttributes, len(self.foreign_keys) #may adjust metric 

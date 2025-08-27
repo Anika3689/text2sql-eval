@@ -3,6 +3,7 @@
 # Assumptions:
 #   1. Only table names are aliased
 #   2. The LIMIT value is an explicit numerical type
+#   3. only one of intersect/union/except
 
 # -------------------------------------------------------------------------------------------------
 # Core Building Blocks
