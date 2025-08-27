@@ -35,7 +35,7 @@ if __name__ == '__main__':
     dataset_path = 'data/spider/datasets_original/train_dataset.csv'
     df = pd.read_csv(dataset_path)  
 
-    path_interim_db_schemas = '/Users/anikaraghavan/Downloads/text2sql-eval/data/spider/interim_db_schemas_object'
+    path_interim_db_schemas = 'data/spider/interim_db_schemas_object'
     db_schema_mapping = deserialize_db_schema_model(path_interim_db_schemas)
 
     output_file = f"{dataset_type}_with_descriptions.csv"
@@ -50,7 +50,6 @@ if __name__ == '__main__':
         desc = generate_description(question, row["query"], row["db_id"], schema_text)
 
         row_df = pd.DataFrame([{
-            **row.to_dict(),
             "question": question,
             "description": desc
         }])

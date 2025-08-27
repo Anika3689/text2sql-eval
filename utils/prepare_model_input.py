@@ -130,10 +130,9 @@ if __name__ == '__main__':
     df = pd.read_csv('data/spider/datasets_original/train_dataset.csv')
     dataSource = Dataset.from_pandas(df)
 
-    # Example usage
     qna = load_qna_dict("data/train_with_descriptions.csv")
 
-    # dataprocessor = PrepareModelInput('decoder-only', dataSource, path_interim_db_schemas, qna)
-    # formatted_dataset = dataprocessor.prepared_dataset
-    # with open('data/spider/ps_train_formatted_descriptions.jsonl', 'wb') as output_file:
-    #     formatted_dataset.to_json(output_file, orient='records')
+    dataprocessor = PrepareModelInput('decoder-only', dataSource, path_interim_db_schemas, qna)
+    formatted_dataset = dataprocessor.prepared_dataset
+    with open('data/spider/ps_train_formatted_descriptions.jsonl', 'wb') as output_file:
+        formatted_dataset.to_json(output_file, orient='records')
