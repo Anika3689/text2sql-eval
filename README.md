@@ -12,7 +12,7 @@ This script runs one of two types of evaluation pipelines on a dataset of gold a
 - **(query)** for the gold query, 
 - **(pred query)** for the model's query prediction.
 
-An example is given by 'combined.csv'
+An example is given by 'combined.csv'.
 You can specify a directory (`output_dir`) to store all contents created by running the script.
 
 ## Usage:
