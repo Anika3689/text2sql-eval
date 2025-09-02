@@ -1,5 +1,4 @@
-# entrypoint.py
-
+## entrypoint.py
 This script runs one of two types of evaluation pipelines on a dataset of gold and predicted SQL queries:
 
 1. **Execution-based accuracy (`exec`)**  
