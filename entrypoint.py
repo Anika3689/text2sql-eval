@@ -65,4 +65,3 @@ if __name__ == '__main__':
         handle_partial_component_accuracy(args)
     else:
         raise Exception("Invalid evaluation type specified!")
-
