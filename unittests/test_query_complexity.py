@@ -1,5 +1,5 @@
 import unittest
-from metadata.query_complexity import QueryComplexity
+from metadata_utils.query_complexity import QueryComplexity
 
 class TestQueryComplexity(unittest.TestCase):
 

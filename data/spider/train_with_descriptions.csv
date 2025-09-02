@@ -1,0 +1,13 @@
+db_id,question,query,query_toks,questions,description
+How many heads of the departments are older than 56 ?,The query counts the number of department heads who are older than 56 years.
+"List the name, born state and age of the heads of departments ordered by age.","The query retrieves the names, birth states, and ages of department heads from the 'head' table, sorted in ascending order by age."
+"List the creation year, name and budget of each department.","The query retrieves the creation year, name, and budget (in billions) of each department from the department_management database."
+What are the maximum and minimum budget of the departments?,The query retrieves the maximum and minimum budget values from the 'department' table in the department_management database.
+What is the average number of employees of the departments whose rank is between 10 and 15?,The query calculates the average number of employees in departments with a ranking between 10 and 15.
+What are the names of the heads who are born outside the California state?,The query retrieves the names of heads who were born in states other than California.
+What are the distinct creation years of the departments managed by a secretary born in state 'Alabama'?,The query retrieves the unique creation years of departments that are managed by a head (secretary) who was born in Alabama.
+What are the names of the states where at least 3 heads were born?,"The query retrieves the names of states from the ""head"" table where at least three individuals were born."
+In which year were most departments established?,"The query retrieves the year in which the highest number of departments were established by grouping the creation years, counting the occurrences, and selecting the year with the most counts."
+Show the name and number of employees for the departments managed by heads whose temporary acting value is 'Yes'?,"The query retrieves the names and number of employees from departments that are managed by heads who are temporarily acting in their roles, indicated by a 'Yes' value in the management table."
+How many acting statuses are there?,The query counts the number of distinct acting statuses recorded in the management table.
+How many departments are led by heads who are not mentioned?,"The query counts the number of departments that do not have a corresponding entry in the management table, indicating they are led by heads who are not mentioned."

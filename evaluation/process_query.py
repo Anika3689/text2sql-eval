@@ -1,9 +1,9 @@
 import json
 import pandas as pd
 import unittest
-from utils.tokenize_query import tokenize
+from preprocess.tokenize_query import tokenize
 from sqlglot import parse_one, expressions as exp, ParseError
-from utils.deserialize_db_model import deserialize_db_schema_model
+from other_utils.deserialize_db_model import deserialize_db_schema_model
 from evaluation.canonical_query_representation import *
 #from utils.process_sql import *
 
@@ -69,7 +69,6 @@ def get_reformatted(schemas, db_id):
 
     return simplified_schema, db_names, simplified_tables
 
-    
 class SQLStandardizer:
 
     def __init__(self, query: str, ast = None): 
@@ -83,9 +82,11 @@ class SQLStandardizer:
         self.default_tables = []
 
     def get_sql(self):
+        if "case when" in self.query:
+            raise NotImplementedError("Case function isn't handled yet!")
         self.parse_sql()
         return self.standardized_query
-
+    
     def parse_sql(self):
         components = self.ast.args
         if self.ast.key in SQL_OPS:
@@ -297,6 +298,7 @@ class SQLStandardizer:
 
     def parse_col_unit(self, expr):
         AGG_OP_TYPES = tuple(op for op in AGG_OPS.values() if op is not None)
+
         if isinstance(expr, exp.Paren):
             expr = expr.this
 
@@ -311,10 +313,11 @@ class SQLStandardizer:
                 col_expr = inner_expr
             col_id = self.get_column_id(col_expr)
             return ColUnit(agg_op, col_id, is_distinct)
-        elif isinstance(expr, exp.Column):
-            col_expr = expr if isinstance(expr, exp.Column) else expr.this
-            col_id = self.get_column_id(col_expr)
+        
+        elif isinstance(expr, (exp.Column, exp.Star)):
+            col_id = self.get_column_id(expr)  
             return ColUnit(None, col_id, False)
+        
         else:
             raise ValueError("Unit can't be parsed as a column unit!")
 
@@ -323,7 +326,9 @@ class SQLStandardizer:
         """Extracts a 'value' term: a string/float literal, nested subquery representation, or a column unit)"""
         if isinstance(value_node, exp.Paren):
             value_node = value_node.this
-            
+        
+        if isinstance(value_node, exp.Null):
+            return "null"
         if isinstance(value_node, exp.Subquery):
             return SQLStandardizer(value_node.this.sql(), value_node.this).get_sql()
         elif isinstance(value_node, exp.Boolean):
@@ -337,17 +342,93 @@ class SQLStandardizer:
             return self.parse_col_unit(value_node)
 
 
+def parse_sql_query(sql: str, schema, db_id: str):
+    """Helper to parse a SQL query into its structured representation. 
+    Returns None if parsing fails, along with error type."""
+    try:
+        sql = sql.replace('"', "'")
+        tokens = tokenize(sql)
+        tables_with_alias = get_tables_with_alias(schema.schema, tokens)
 
+        SQLStandardizer.schema = schema
+        SQLStandardizer.tables_with_alias = tables_with_alias
+        parser = SQLStandardizer(sql.lower())
+
+        parsed_rep = parser.get_sql()
+        return parsed_rep, None
+    except ValueError:
+        return None, "syntacticallyIncorrect"
+    except NotImplementedError:
+        return None, "unhandled"
+    except KeyError:
+        return None, "schemaLinkingError"
+    except Exception:
+        return None, "other"
+
+
+def run_parser_on_dataset(dataset: str, output_file: str, schemas: map):
+    """Parses both gold and predicted queries, writes them + parsed reps to output."""
+    df = pd.read_csv(dataset, quotechar='"', doublequote=True)
+
+    # Storage for results
+    gold_queries, pred_queries = [], []
+    gold_parsed, pred_parsed = [], []
+    questions = []
+
+    # Error counters
+    counts = {"unhandled": 0,
+              "schemaLinkingError": 0,
+              "syntacticallyIncorrect": 0,
+              "other": 0}
+
+    for _, sample in df.iterrows():
+        db_id = sample['db_id']
+        question = sample['question']
+        gold_query = sample['query']
+        pred_query = sample['pred_query']
+
+        schema, _, table = get_reformatted(schemas, db_id)
+        schema = Schema(schema, table)
+
+        # Parse both queries
+        gold_rep, gold_err = parse_sql_query(gold_query, schema, db_id)
+        pred_rep, pred_err = parse_sql_query(pred_query, schema, db_id)
+
+        if gold_err: counts[gold_err] += 1
+        if pred_err: counts[pred_err] += 1
+
+        # Store results
+        if gold_err is None and pred_err is None:
+            questions.append(question)
+            gold_queries.append(gold_query)
+            pred_queries.append(pred_query)
+            gold_parsed.append(gold_rep)
+            pred_parsed.append(pred_rep)
+
+    # Write results to file
+    output_df = pd.DataFrame({
+        "question": questions,
+        "gold_query": gold_queries,
+        "gold_parsed_rep": gold_parsed,
+        "pred_query": pred_queries,
+        "pred_parsed_rep": pred_parsed
+    })
+    #output_df.to_csv(output_file, index=False)
+
+    return counts, questions, gold_parsed, pred_parsed
 
 
 
 if __name__ == '__main__':
 
     schemas = deserialize_db_schema_model('/Users/anikaraghavan/Downloads/text2sql-eval/data/spider/interim_db_schemas_object')
+    # error_breakdown, questions, g_parsed, p_parsed = run_parser_on_dataset('combined.csv', "test_parsed_reps.csv", schemas)
+    # print(error_breakdown)
 
-    sql = 'SELECT T1.city FROM (SELECT city FROM airports GROUP BY city HAVING count(*)  >  3) AS T1'
+    # Sample query parsing:
+    sql = "SELECT COUNT(singer_id) FROM singer"
     sql = sql.replace('"', "'")
-    db_id = 'flight_4'
+    db_id = 'concert_singer'
     schema, db_names, table = get_reformatted(schemas, db_id)
     schema = Schema(schema, table)
     tokens = tokenize(sql)
@@ -362,30 +443,9 @@ if __name__ == '__main__':
     print(parser.get_sql())
     
     
-    # df = pd.read_csv('data/spider/datasets_original/train_dataset.csv', quotechar='"', doublequote=True)
-    # for i in range(len(df)):
-    #     sample = df.iloc[i]
-    #     db_id = sample['db_id']
-    #     if db_id != 'small_bank_1':
-    #         continue
-    #     sql = sample['query']
-    #     sql = sql.replace('"', "'")
-    #     print(db_id)
-    #     print(sql)
-    #     schema, db_names, table = get_reformatted(schemas, db_id)
-    #     schema = Schema(schema, table)
-    #     tokens = tokenize(sql)
-    #     tables_with_alias = get_tables_with_alias(schema.schema, tokens)
-    #     # print(schema.idMap)
-    #     # print(tables_with_alias)
-
-    #     SQLStandardizer.schema = schema
-    #     SQLStandardizer.tables_with_alias = tables_with_alias
-        
-    #     parser = SQLStandardizer(sql.lower())
-    #     components = parser.ast.args
-    #     print(parser.get_sql())
 
 
 
-        
+
+
+            

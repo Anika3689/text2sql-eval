@@ -1,1692 +1,847 @@
 SELECT COUNT(singer_id) FROM singer
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(singer_id) FROM singer
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, T2.country, T2.age FROM singer AS T1 INNER JOIN concert AS T2 ON T1.singer_id = T2.singer_id ORDER BY T2.age DESC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, T2.country, T2.age FROM singer AS T1 INNER JOIN concert AS T2 ON T1.singer_id = T2.singer_id ORDER BY T2.age DESC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(age) FROM singer WHERE country = 'France'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(age) FROM singer WHERE country = 'France'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, T1.song_release_year FROM singer AS T1 INNER JOIN singer_in_concert AS T2 ON T1.singer_id = T2.singer_id INNER JOIN concert AS T3 ON T2.concert_id = T3.concert_id WHERE T1.age = ( SELECT MIN(T1.age) FROM singer AS T1 INNER JOIN singer_in_concert AS T2 ON T1.singer_id = T2.singer_id INNER JOIN concert AS T3 ON T
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.song_name, T2.song_release_year FROM singer AS T1 INNER JOIN singer AS T2 ON T1.singer_id = T2.singer_id WHERE T1.age = ( SELECT MIN(T1.age) FROM singer AS T1 INNER JOIN singer_in_concert AS T2 ON T1.singer_id = T2.singer_id WHERE T1.age > 0 )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.country FROM singer AS T1 INNER JOIN concert AS T2 ON T1.singer_id = T2.singer_id WHERE T1.age > 20
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.country FROM singer AS T1 INNER JOIN singer_in_concert AS T2 ON T1.singer_id = T2.singer_id WHERE T1.age > 20
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.country, COUNT(T2.country) FROM singer AS T1 INNER JOIN singer AS T2 ON T1.country = T2.country GROUP BY T2.country
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(singer_id) FROM singer GROUP BY country
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.song_name FROM singer AS T1 INNER JOIN singer_in_concert AS T2 ON T1.singer_id = T2.singer_id WHERE T1.age > ( SELECT AVG(age) FROM singer )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.song_name FROM singer AS T1 INNER JOIN concert_singer AS T2 ON T1.singer_id = T2.singer_id WHERE T1.age > ( SELECT AVG(T1.age) FROM singer AS T1 INNER JOIN concert_singer AS T2 ON T1.singer_id = T2.singer_id )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.location, T1.name FROM stadium AS T1 INNER JOIN `concert` AS T2 ON T2.stadium_id = T1.stadium_id WHERE T1.capacity BETWEEN 5000 AND 10000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.location, T1.name FROM stadium AS T1 INNER JOIN `stadium` AS T2 ON T1.stadium_id = T2.stadium_id WHERE T2.capacity BETWEEN 5000 AND 10000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MAX(capacity) FROM stadium
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(capacity) FROM stadium
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, T1.capacity FROM stadium AS T1 INNER JOIN ( SELECT T1.stadium_id, MAX(T1.average) AS Max FROM stadium AS T1 INNER JOIN concert AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id ) AS T2 ON T1.stadium_id = T2.stadium_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, T2.capacity FROM concert AS T1 INNER JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id ORDER BY T2.average DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(concert_id) FROM concert WHERE year = 2014 INTERSECT SELECT COUNT(concert_id) FROM concert WHERE year = 2015
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(CASE WHEN year = '2014' THEN 1 ELSE 0 END) FROM concert
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, COUNT(T2.concert_id) FROM stadium AS T1 INNER JOIN concert AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T3.concert_id) FROM stadium AS T1 INNER JOIN concert AS T2 ON T1.stadium_id = T2.stadium_id INNER JOIN singer_in_concert AS T3 ON T2.concert_id = T3.concert_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, T2.capacity FROM concert AS T1 INNER JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > '2014' GROUP BY T2.name, T2.capacity ORDER BY COUNT(T2.name) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, T2.capacity FROM concert AS T1 INNER JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > '2013' GROUP BY T1.year ORDER BY COUNT(T1.concert_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT year FROM concert GROUP BY year ORDER BY COUNT(concert_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(concert_id) FROM concert
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM concert AS T1 INNER JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.concert_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T3.name FROM singer_in_concert AS T1 INNER JOIN concert AS T2 ON T1.concert_id = T2.concert_id INNER JOIN stadium AS T3 ON T2.stadium_id = T3.stadium_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.country FROM singer AS T1 INNER JOIN singer AS T2 ON T1.country = T2.country WHERE T1.age > 40 INTERSECT SELECT T2.country FROM singer AS T1 INNER JOIN singer AS T2 ON T1.country = T2.country WHERE T1.age < 30
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM concert AS T1 INNER JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year!= 2014
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM stadium AS T1 INNER JOIN concert AS T2 ON T2.stadium_id = T1.stadium_id WHERE T2.year!= 2014
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, T1.theme, COUNT(T2.singer_id) FROM concert AS T1 INNER JOIN singer_in_concert AS T2 ON T1.concert_id = T2.concert_id GROUP BY T1.name, T1.theme
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.concert_name, T2.theme, COUNT(T1.singer_id) FROM singer_in_concert AS T1 INNER JOIN concert AS T2 ON T1.concert_id = T2.concert_id GROUP BY T2.concert_name, T2.theme
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, COUNT(T1.concert_id) FROM singer_in_concert AS T1 INNER JOIN singer AS T2 ON T1.singer_id = T2.singer_id GROUP BY T2.name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, COUNT(T2.concert_id) FROM singer AS T1 INNER JOIN singer_in_concert AS T2 ON T1.singer_id = T2.singer_id GROUP BY T1.name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T3.name FROM concert AS T1 INNER JOIN singer_in_concert AS T2 ON T1.concert_id = T2.concert_id INNER JOIN singer AS T3 ON T2.singer_id = T3.singer_id WHERE T1.year = '2014'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM concert AS T1 INNER JOIN singer_in_concert AS T2 ON T1.concert_id = T2.concert_id INNER JOIN singer AS T3 ON T2.singer_id = T3.singer_id WHERE T1.year = '2014'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, T1.country FROM singer AS T1 INNER JOIN `singer_in_concert` AS T2 ON T1.singer_id = T2.singer_id INNER JOIN concert AS T3 ON T3.concert_id = T2.concert_id WHERE T3.concert_name LIKE '%Hey%'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, T1.country FROM singer AS T1 INNER JOIN song_name AS T2 ON T1.singer_id = T2.singer_id WHERE T2.song_name LIKE '%Hey%'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM stadium AS T1 INNER JOIN concert AS T2 ON T2.stadium_id = T1.stadium_id WHERE T2.year = '2014' INTERSECT SELECT T1.name FROM stadium AS T1 INNER JOIN concert AS T2 ON T2.stadium_id = T1.stadium_id WHERE T2.year = '2015'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, T1.location FROM stadium AS T1 INNER JOIN concert AS T2 ON T1.stadium_id = T2.stadium_id WHERE T2.year = '2014' INTERSECT SELECT T1.name, T1.location FROM stadium AS T1 INNER JOIN concert AS T2 ON T1.stadium_id = T2.stadium_id WHERE T2.year = '2015'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.concert_id) FROM concert AS T1 INNER JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T2.capacity = ( SELECT MAX(capacity) FROM stadium )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(concert_id) FROM concert WHERE stadium_id = ( SELECT stadium_id FROM stadium ORDER BY capacity DESC LIMIT 1 )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(CASE WHEN T2.weight > 10 THEN 1 ELSE 0 END) FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid INNER JOIN pets AS T3 ON T2.petid = T3.petid
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(CASE WHEN T2.weight > 10 THEN 1 ELSE 0 END) FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid INNER JOIN pets AS T3 ON T2.petid = T3.petid
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.weight FROM pets AS T1 INNER JOIN has_pet AS T2 ON T1.petid = T2.petid WHERE T1.pettype = 'Dog' ORDER BY T1.pet_age LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.weight FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid INNER JOIN pets AS T3 ON T2.petid = T3.petid WHERE T1.age = ( SELECT MIN(age) FROM student WHERE major = ( SELECT major FROM student WHERE fname = 'Pam' ) )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.pettype, T1.weight FROM pets AS T1 INNER JOIN ( SELECT pettype, MAX(weight) AS weight FROM pets GROUP BY pettype ) AS T2 ON T1.pettype = T2.pettype AND T1.weight = T2.weight
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.pettype, MAX(T1.weight) FROM pets AS T1 GROUP BY T1.pettype
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T2.petid) FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid WHERE T1.age > 20
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(T2.petid) FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid WHERE T1.age > 20
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(CASE WHEN T2.pettype = 'Dog' THEN 1 ELSE 0 END) FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid INNER JOIN pets AS T3 ON T2.petid = T3.petid WHERE T1.sex = 'F'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(pettype) FROM pets AS T1 INNER JOIN has_pet AS T2 ON T1.petid = T2.petid INNER JOIN student AS T3 ON T2.stuid = T3.stuid WHERE T3.sex = 'F' AND T1.pettype = 'dog'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T2.pettype) FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid INNER JOIN pets AS T3 ON T2.petid = T3.petid
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT pettype) FROM pets
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.fname FROM pets AS T1 INNER JOIN student AS T2 ON T1.petid = T2.stuid WHERE T1.pettype = 'cat' OR T1.pettype = 'dog'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.fname FROM pets AS T1 INNER JOIN student AS T2 ON T1.petid = T2.stuid WHERE T1.pettype = 'cat' OR T1.pettype = 'dog'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.fname FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid INNER JOIN pets AS T3 ON T2.petid = T3.petid WHERE T3.pettype = 'cat' INTERSECT SELECT T1.fname FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid INNER JOIN pets AS T3 ON T2.petid = T3.petid WHERE T3.pet
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.fname FROM has_pet AS T1 INNER JOIN student AS T2 ON T1.stuid = T2.stuid INNER JOIN pets AS T3 ON T1.petid = T3.petid WHERE T3.pettype = 'cat' INTERSECT SELECT T2.fname FROM has_pet AS T1 INNER JOIN student AS T2 ON T1.stuid = T2.stuid INNER JOIN pets AS T3 ON T1.petid = T3.petid WHERE T3.pet
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.major, T2.age FROM pets AS T1 INNER JOIN student AS T2 ON T2.stuid = T1.petid WHERE T1.pettype = 'cat' EXCEPT SELECT T2.major, T2.age FROM pets AS T1 INNER JOIN student AS T2 ON T2.stuid = T1.petid
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.major FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid WHERE T2.petid NOT IN ( SELECT petid FROM pets WHERE pettype = 'cat' )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.stuid FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid WHERE T2.petid NOT IN ( SELECT petid FROM pets WHERE pettype = 'cat' )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.stuid FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid INNER JOIN pets AS T3 ON T2.petid = T3.petid WHERE T3.pettype!= 'cat'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.fname, T1.age FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid INNER JOIN pets AS T3 ON T2.petid = T3.petid WHERE T3.pettype = 'dog'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.fname FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid INNER JOIN pets AS T3 ON T2.petid = T3.petid WHERE T3.pettype = 'dog' EXCEPT SELECT T1.fname FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid INNER JOIN pets AS T3 ON T2.petid = T3.petid WHERE T3.pettype
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT pettype, weight FROM pets ORDER BY pet_age LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.pettype FROM pets AS T1 INNER JOIN has_pet AS T2 ON T1.petid = T2.petid WHERE T2.stuid = ( SELECT stuid FROM student WHERE age = ( SELECT MAX(age) FROM student ) )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.petid, T2.weight FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid INNER JOIN pets AS T3 ON T2.petid = T3.petid WHERE T3.pet_age > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.petid, T1.weight FROM pets AS T1 INNER JOIN has_pet AS T2 ON T1.petid = T2.petid WHERE T1.pet_age > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T1.pet_age),  T2.pettype FROM pets AS T1 INNER JOIN pets AS T2 ON T1.pet_age = T2.pet_age GROUP BY T2.pettype
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.pettype, AVG(T1.pet_age) FROM pets AS T1 INNER JOIN has_pet AS T2 ON T1.petid = T2.petid GROUP BY T1.pettype
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T1.weight) FROM pets AS T1 INNER JOIN has_pet AS T2 ON T1.petid = T2.petid GROUP BY T1.pettype
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.pettype, AVG(T2.weight) FROM has_pet AS T1 INNER JOIN pets AS T2 ON T1.petid = T2.petid GROUP BY T2.pettype
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.fname, T2.age FROM student AS T2 INNER JOIN has_pet AS T1 ON T2.stuid = T1.stuid
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.fname, T2.age FROM pets AS T1 INNER JOIN student AS T2 ON T2.stuid = T1.petid
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.petid FROM pets AS T1 INNER JOIN has_pet AS T2 ON T1.petid = T2.petid INNER JOIN student AS T3 ON T2.stuid = T3.stuid WHERE T3.lname = 'Smith'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.petid FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid WHERE T1.lname = 'Smith'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T2.petid) FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T2.petid),  T1.stuid FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.fname, T2.sex FROM has_pet AS T1 INNER JOIN student AS T2 ON T1.stuid = T2.stuid GROUP BY T2.fname, T2.sex, T2.stuid HAVING COUNT(T1.petid) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.fname, T1.sex FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.fname, T1.sex HAVING COUNT(T2.stuid) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.lname FROM student AS T1 INNER JOIN has_pet AS T2 ON T1.stuid = T2.stuid INNER JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'cat' AND T3.pet_age = 3
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.lname FROM pets AS T1 INNER JOIN student AS T2 ON T1.petid = T2.stuid WHERE T1.pettype = 'cat' AND T1.pet_age = 3
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(age) FROM student WHERE stuid NOT IN ( SELECT stuid FROM has_pet )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T1.age) FROM student AS T1 LEFT JOIN has_pet AS T2 ON T1.stuid = T2.stuid WHERE T2.stuid IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.employee_id) FROM employee AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(employee_id) FROM employee
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM employee AS T1 ORDER BY T1.age ASC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM employee AS T1 INNER JOIN evaluation AS T2 ON T1.employee_id = T2.employee_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.employee_id) FROM employee AS T1 INNER JOIN evaluation AS T2 ON T1.employee_id = T2.employee_id GROUP BY T1.city
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T2.employee_id) FROM city AS T1 INNER JOIN employee AS T2 ON T1.city = T2.city
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.city FROM evaluation AS T1 INNER JOIN employee AS T2 ON T1.employee_id = T2.employee_id WHERE T2.age < 30 GROUP BY T2.city HAVING COUNT(T1.employee_id) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.city FROM employee AS T1 INNER JOIN shop AS T2 ON T1.employee_id = T2.manager_name WHERE T1.age < 30 GROUP BY T2.city HAVING COUNT(T2.city) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.location) FROM shop AS T1 INNER JOIN hiring AS T2 ON T1.shop_id = T2.shop_id WHERE T2.is_full_time = 1 GROUP BY T1.location
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.shop_id), T1.location FROM shop AS T1 GROUP BY T1.location
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.manager_name, T1.district FROM shop AS T1 INNER JOIN hiring AS T2 ON T1.shop_id = T2.shop_id GROUP BY T1.manager_name, T1.district, T1.number_products ORDER BY T1.number_products DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.manager_name, T1.district FROM shop AS T1 INNER JOIN hiring AS T2 ON T1.shop_id = T2.shop_id ORDER BY T1.number_products DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MIN(number_products) FROM shop
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MIN(number_products) FROM shop
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, T2.location, T2.district FROM shop AS T1 INNER JOIN employee AS T2 ON T1.shop_id = T2.employee_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, T1.location, T1.district FROM shop AS T1 ORDER BY T1.number_products DESC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM shop AS T1 INNER JOIN employee AS T2 ON T1.manager_name = T2.name WHERE T1.number_products > ( SELECT AVG(number_products) FROM shop )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM shop AS T1 INNER JOIN employee AS T2 ON T1.shop_id = T2.employee_id WHERE T1.number_products > ( SELECT AVG(number_products) FROM shop )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM employee AS T1 INNER JOIN evaluation AS T2 ON T2.employee_id = T1.employee_id GROUP BY T1.employee_id ORDER BY COUNT(T2.employee_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM employee AS T1 INNER JOIN evaluation AS T2 ON T1.employee_id = T2.employee_id GROUP BY T1.name ORDER BY COUNT(T2.year_awarded) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM employee AS T1 INNER JOIN evaluation AS T2 ON T1.employee_id = T2.employee_id WHERE T2.bonus = 1 ORDER BY T2.bonus DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM evaluation AS T1 INNER JOIN employee AS T2 ON T1.employee_id = T2.employee_id ORDER BY T1.bonus DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM employee AS T1 INNER JOIN evaluation AS T2 ON T1.employee_id = T2.employee_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM employee AS T1 INNER JOIN evaluation AS T2 ON T1.employee_id = T2.employee_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM hiring AS T1 INNER JOIN shop AS T2 ON T1.shop_id = T2.shop_id GROUP BY T2.name ORDER BY COUNT(T1.employee_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM hiring AS T1 INNER JOIN shop AS T2 ON T1.shop_id = T2.shop_id GROUP BY T2.name ORDER BY COUNT(T1.employee_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM shop AS T1 LEFT JOIN hiring AS T2 ON T1.shop_id = T2.shop_id WHERE T2.shop_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM hiring AS T1 INNER JOIN shop AS T2 ON T1.shop_id = T2.shop_id WHERE T1.employee_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, COUNT(T1.employee_id) FROM hiring AS T1 INNER JOIN shop AS T2 ON T1.shop_id = T2.shop_id GROUP BY T2.name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, COUNT(T1.employee_id) FROM shop AS T1 INNER JOIN hiring AS T2 ON T1.shop_id = T2.shop_id GROUP BY T1.name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(bonus) FROM evaluation
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(bonus) FROM evaluation
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT * FROM `evaluation` AS T1 INNER JOIN `employee` AS T2 ON T1.employee_id = T2.employee_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM employee AS T1 INNER JOIN hiring AS T2 ON T1.employee_id = T2.employee_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.district FROM shop AS T1 INNER JOIN evaluation AS T2 ON T1.shop_id = T2.employee_id WHERE T1.number_products < 3000 INTERSECT SELECT T2.district FROM shop AS T1 INNER JOIN evaluation AS T2 ON T1.shop_id = T2.employee_id WHERE T1.number_products > 10000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.district FROM shop AS T1 INNER JOIN employee_hire_evaluation.shop AS T2 ON T1.shop_id = T2.shop_id WHERE T1.number_products < 3000 INTERSECT SELECT T2.district FROM shop AS T1 INNER JOIN employee_hire_evaluation.shop AS T2 ON T1.shop_id = T2.shop_id WHERE T1.number_products > 10000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.location) FROM shop AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T2.location) FROM shop AS T1 INNER JOIN hiring AS T2 ON T1.shop_id = T2.shop_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(document_id) FROM documents
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(document_id) FROM documents
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT document_id, document_name, document_description FROM documents
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT document_id, document_name, document_description FROM documents
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.document_name, T2.template_id FROM documents AS T1 INNER JOIN templates AS T2 ON T1.template_id = T2.template_id WHERE T1.document_description LIKE '%w%'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.document_name, T1.template_id FROM documents AS T1 INNER JOIN templates AS T2 ON T1.template_id = T2.template_id WHERE T1.document_description LIKE '%w%'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.document_id, T2.template_id, T2.template_details FROM documents AS T1 INNER JOIN templates AS T2 ON T1.template_id = T2.template_id WHERE T1.document_name = 'Robbin CV'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.document_id, T2.template_id, T1.document_description FROM documents AS T1 INNER JOIN templates AS T2 ON T1.template_id = T2.template_id WHERE T1.document_name = 'Robbin CV'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.template_id) FROM documents AS T1 INNER JOIN templates AS T2 ON T1.template_id = T2.template_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T2.template_id) FROM documents AS T1 INNER JOIN templates AS T2 ON T1.template_id = T2.template_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.document_id) FROM documents AS T1 INNER JOIN templates AS T2 ON T1.template_id = T2.template_id INNER JOIN ref_template_types AS T3 ON T2.template_type_code = T3.template_type_code WHERE T3.template_type_code = 'PPT'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T2.document_id) FROM ref_template_types AS T1 INNER JOIN templates AS T2 ON T1.template_type_code = T2.template_type_code WHERE T1.template_type_code = 'PPT'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_id, COUNT(T2.document_id) FROM templates AS T1 INNER JOIN documents AS T2 ON T1.template_id = T2.template_id GROUP BY T1.template_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_id, COUNT(T2.document_id) FROM templates AS T1 INNER JOIN documents AS T2 ON T1.template_id = T2.template_id GROUP BY T1.template_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.template_id, T2.template_type_code FROM documents AS T1 INNER JOIN templates AS T2 ON T1.template_id = T2.template_id GROUP BY T2.template_id, T2.template_type_code ORDER BY COUNT(T1.document_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_type_code FROM ref_template_types AS T1 INNER JOIN templates AS T2 ON T1.template_type_code = T2.template_type_code GROUP BY T1.template_type_code ORDER BY COUNT(T1.template_type_code) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_id FROM templates AS T1 INNER JOIN documents AS T2 ON T1.template_id = T2.template_id GROUP BY T1.template_id HAVING COUNT(T1.template_id) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.template_id FROM documents AS T1 INNER JOIN templates AS T2 ON T1.template_id = T2.template_id GROUP BY T2.template_id HAVING COUNT(T2.template_id) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.template_id FROM documents AS T1 INNER JOIN templates AS T2 ON T1.template_id = T2.template_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_id FROM templates AS T1 LEFT JOIN documents AS T2 ON T1.template_id = T2.template_id WHERE T2.document_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(template_id) FROM templates
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(template_id) FROM templates
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_id, T1.version_number, T1.template_type_code FROM templates AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_id, T1.version_number, T1.template_type_code FROM templates AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.template_type_code FROM templates AS T1 INNER JOIN ref_template_types AS T2 ON T1.template_type_code = T2.template_type_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.template_type_code FROM ref_template_types AS T1 INNER JOIN templates AS T2 ON T1.template_type_code = T2.template_type_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_id FROM templates AS T1 INNER JOIN ref_template_types AS T2 ON T1.template_type_code = T2.template_type_code WHERE T2.template_type_code = 'PP'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_id FROM templates AS T1 INNER JOIN ref_template_types AS T2 ON T1.template_type_code = T2.template_type_code WHERE T2.template_type_code = 'PP'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(template_id) FROM templates AS T1 INNER JOIN ref_template_types AS T2 ON T1.template_type_code = T2.template_type_code WHERE T2.template_type_code = 'CV'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(template_id) FROM templates AS T1 INNER JOIN ref_template_types AS T2 ON T1.template_type_code = T2.template_type_code WHERE T2.template_type_code = 'CV'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.version_number, T1.template_type_code FROM templates AS T1 INNER JOIN ref_template_types AS T2 ON T1.template_type_code = T2.template_type_code WHERE T1.version_number > 5
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.version_number, T1.template_type_code FROM templates AS T1 INNER JOIN ref_template_types AS T2 ON T1.template_type_code = T2.template_type_code WHERE T1.version_number > 5
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_type_code, COUNT(T2.template_id) FROM ref_template_types AS T1 INNER JOIN templates AS T2 ON T1.template_type_code = T2.template_type_code GROUP BY T1.template_type_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_type_code, COUNT(T2.template_id) FROM ref_template_types AS T1 INNER JOIN templates AS T2 ON T1.template_type_code = T2.template_type_code GROUP BY T1.template_type_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_type_code FROM ref_template_types AS T1 INNER JOIN templates AS T2 ON T2.template_type_code = T1.template_type_code GROUP BY T1.template_type_code ORDER BY COUNT(T2.template_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_type_code FROM ref_template_types AS T1 INNER JOIN templates AS T2 ON T1.template_type_code = T2.template_type_code GROUP BY T1.template_type_code ORDER BY COUNT(T2.template_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_type_code FROM ref_template_types AS T1 INNER JOIN templates AS T2 ON T2.template_type_code = T1.template_type_code GROUP BY T1.template_type_code HAVING COUNT(T2.template_id) < 3
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_type_code FROM ref_template_types AS T1 INNER JOIN templates AS T2 ON T1.template_type_code = T2.template_type_code GROUP BY T1.template_type_code HAVING COUNT(T1.template_type_code) < 3
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MIN(version_number), template_type_code FROM templates
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.version_number, T1.template_type_code FROM templates AS T1 INNER JOIN ref_template_types AS T2 ON T1.template_type_code = T2.template_type_code ORDER BY T1.version_number LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.template_type_code FROM documents AS T1 INNER JOIN templates AS T2 ON T1.template_id = T2.template_id WHERE T1.document_name = 'Data base'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.template_type_code FROM documents AS T1 INNER JOIN templates AS T2 ON T1.template_id = T2.template_id WHERE T1.document_name = 'Data base'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T3.document_name FROM ref_template_types AS T1 INNER JOIN templates AS T2 ON T1.template_type_code = T2.template_type_code INNER JOIN documents AS T3 ON T2.template_id = T3.template_id WHERE T1.template_type_code = 'BK'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.document_name FROM templates AS T1 INNER JOIN documents AS T2 ON T1.template_id = T2.template_id WHERE T1.template_type_code = 'BK'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.template_type_code, COUNT(T2.template_type_code) FROM documents AS T1 INNER JOIN templates AS T2 ON T1.template_id = T2.template_id INNER JOIN ref_template_types AS T3 ON T2.template_type_code = T3.template_type_code GROUP BY T2.template_type_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_type_code, COUNT(T2.document_id) FROM ref_template_types AS T1 INNER JOIN documents AS T2 ON T2.template_id = T1.template_type_code GROUP BY T1.template_type_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.template_type_code FROM documents AS T1 INNER JOIN templates AS T2 ON T1.template_id = T2.template_id GROUP BY T2.template_type_code ORDER BY COUNT(T1.document_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_type_code FROM ref_template_types AS T1 INNER JOIN templates AS T2 ON T1.template_type_code = T2.template_type_code GROUP BY T1.template_type_code ORDER BY COUNT(T2.template_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_type_code FROM ref_template_types AS T1 LEFT JOIN templates AS T2 ON T1.template_type_code = T2.template_type_code WHERE T2.template_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_type_code FROM ref_template_types AS T1 LEFT JOIN templates AS T2 ON T1.template_type_code = T2.template_type_code WHERE T2.template_type_code IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_type_code, T1.template_type_description FROM ref_template_types AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_type_code, T1.template_type_description FROM ref_template_types AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.template_type_description FROM ref_template_types AS T1 INNER JOIN templates AS T2 ON T1.template_type_code = T2.template_type_code WHERE T1.template_type_code = 'AD'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.template_type_description FROM ref_template_types AS T1 INNER JOIN templates AS T2 ON T1.template_type_code = T2.template_type_code WHERE T1.template_type_code = 'AD'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.template_type_code FROM ref_template_types AS T1 INNER JOIN templates AS T2 ON T1.template_type_code = T2.template_type_code WHERE T1.template_type_description = 'Book'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_type_code FROM ref_template_types AS T1 INNER JOIN templates AS T2 ON T2.template_type_code = T1.template_type_code WHERE T1.template_type_description = 'Book'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.template_type_description FROM documents AS T1 INNER JOIN templates AS T2 ON T1.template_id = T2.template_id INNER JOIN ref_template_types AS T3 ON T2.template_type_code = T3.template_type_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.template_type_description FROM templates AS T1 INNER JOIN ref_template_types AS T2 ON T1.template_type_code = T2.template_type_code WHERE T1.template_id IN ( SELECT T2.template_id FROM documents AS T1 INNER JOIN templates AS T2 ON T1.template_id = T2.template_id )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.template_id FROM ref_template_types AS T1 INNER JOIN templates AS T2 ON T1.template_type_code = T2.template_type_code WHERE T1.template_type_description = 'Presentation'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.template_id FROM templates AS T1 INNER JOIN ref_template_types AS T2 ON T1.template_type_code = T2.template_type_code WHERE T2.template_type_description = 'Presentation'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(paragraph_id) FROM paragraphs
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(paragraph_id) FROM paragraphs
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(paragraph_id) FROM paragraphs AS T1 INNER JOIN documents AS T2 ON T1.document_id = T2.document_id WHERE T2.document_name = 'Summer Show'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(paragraph_id) FROM paragraphs AS T1 INNER JOIN documents AS T2 ON T1.document_id = T2.document_id WHERE T2.document_name = 'Summer Show'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.paragraph_text FROM paragraphs AS T1 INNER JOIN documents AS T2 ON T1.document_id = T2.document_id WHERE T1.paragraph_text = 'Korea '
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.paragraph_text FROM paragraphs AS T1 INNER JOIN documents AS T2 ON T1.document_id = T2.document_id WHERE T1.paragraph_text = 'Korea '
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.paragraph_id, T2.paragraph_text FROM documents AS T1 INNER JOIN paragraphs AS T2 ON T1.document_id = T2.document_id WHERE T1.document_name = 'Welcome to NY'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.paragraph_id, T2.paragraph_text FROM documents AS T1 INNER JOIN paragraphs AS T2 ON T1.document_id = T2.document_id WHERE T1.document_name = 'Welcome to NY'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.paragraph_text FROM documents AS T1 INNER JOIN paragraphs AS T2 ON T1.document_id = T2.document_id WHERE T1.document_name = 'Customer reviews'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.paragraph_text FROM documents AS T1 INNER JOIN paragraphs AS T2 ON T1.document_id = T2.document_id WHERE T1.document_name = 'Customer reviews'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.document_id, COUNT(T1.paragraph_id) FROM paragraphs AS T1 INNER JOIN documents AS T2 ON T1.document_id = T2.document_id GROUP BY T2.document_id ORDER BY T2.document_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.document_id, COUNT(T1.paragraph_id) FROM paragraphs AS T1 INNER JOIN documents AS T2 ON T1.document_id = T2.document_id GROUP BY T1.document_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT document_id, document_name, COUNT(paragraph_id) FROM documents AS T1 INNER JOIN paragraphs AS T2 ON T1.document_id = T2.document_id GROUP BY document_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.document_id, T2.document_name, COUNT(T3.paragraph_id) FROM documents AS T1 INNER JOIN templates AS T2 ON T1.template_id = T2.template_id INNER JOIN paragraphs AS T3 ON T1.document_id = T3.document_id GROUP BY T1.document_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.document_id FROM documents AS T1 INNER JOIN paragraphs AS T2 ON T1.document_id = T2.document_id GROUP BY T1.document_id HAVING COUNT(T2.paragraph_id) >= 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.document_id FROM paragraphs AS T1 INNER JOIN documents AS T2 ON T1.document_id = T2.document_id GROUP BY T2.document_id HAVING COUNT(T1.paragraph_id) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.document_id, T2.document_name FROM paragraphs AS T1 INNER JOIN documents AS T2 ON T1.document_id = T2.document_id GROUP BY T2.document_id, T2.document_name ORDER BY COUNT(T1.paragraph_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T3.document_id, T3.document_name FROM paragraphs AS T1 INNER JOIN documents AS T2 ON T1.document_id = T2.document_id INNER JOIN documents AS T3 ON T3.document_id = T2.document_id WHERE T1.paragraph_id = ( SELECT MAX(T1.paragraph_id) FROM paragraphs AS T1 INNER JOIN documents AS T2 ON T1.document_id = T2.document_id )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.document_id FROM documents AS T1 INNER JOIN paragraphs AS T2 ON T1.document_id = T2.document_id GROUP BY T1.document_id ORDER BY COUNT(T2.paragraph_id) LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.document_id FROM paragraphs AS T1 INNER JOIN documents AS T2 ON T1.document_id = T2.document_id GROUP BY T2.document_id ORDER BY COUNT(T1.paragraph_id) LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.document_id FROM paragraphs AS T1 INNER JOIN documents AS T2 ON T1.document_id = T2.document_id GROUP BY T2.document_id HAVING COUNT(T1.paragraph_id) BETWEEN 1 AND 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.document_id FROM paragraphs AS T1 INNER JOIN documents AS T2 ON T1.document_id = T2.document_id GROUP BY T2.document_id HAVING COUNT(T1.paragraph_id) BETWEEN 1 AND 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.document_id FROM paragraphs AS T1 INNER JOIN documents AS T2 ON T1.document_id = T2.document_id WHERE T1.paragraph_text = 'Brazil' INTERSECT SELECT T2.document_id FROM paragraphs AS T1 INNER JOIN documents AS T2 ON T1.document_id = T2.document_id WHERE T1.paragraph_text = 'Ireland'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.document_id FROM paragraphs AS T1 INNER JOIN documents AS T2 ON T1.document_id = T2.document_id WHERE T1.paragraph_text = 'Brazil' INTERSECT SELECT T1.document_id FROM paragraphs AS T1 INNER JOIN documents AS T2 ON T1.document_id = T2.document_id WHERE T1.paragraph_text = 'Ireland'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(teacher_id) FROM teacher
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(teacher_id) FROM teacher
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM course_arrange AS T1 INNER JOIN teacher AS T2 ON T1.teacher_id = T2.teacher_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT name FROM teacher ORDER BY age ASC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.age, T1.hometown FROM teacher AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.age, T2.hometown FROM course_arrange AS T1 INNER JOIN teacher AS T2 ON T1.teacher_id = T2.teacher_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM course_arrange AS T1 INNER JOIN teacher AS T2 ON T1.teacher_id = T2.teacher_id WHERE T2.hometown!= 'Little Lever Urban District'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM course_arrange AS T1 INNER JOIN teacher AS T2 ON T1.teacher_id = T2.teacher_id WHERE T2.hometown!= 'Little Lever Urban District'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM teacher AS T1 INNER JOIN course_arrange AS T2 ON T1.teacher_id = T2.teacher_id WHERE T1.age = 32 INTERSECT SELECT T1.name FROM teacher AS T1 INNER JOIN course_arrange AS T2 ON T1.teacher_id = T2.teacher_id WHERE T1.age = 33
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM course_arrange AS T1 INNER JOIN teacher AS T2 ON T1.teacher_id = T2.teacher_id WHERE T2.age = 32 INTERSECT SELECT T2.name FROM course_arrange AS T1 INNER JOIN teacher AS T2 ON T1.teacher_id = T2.teacher_id WHERE T2.age = 33
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.hometown FROM teacher AS T1 INNER JOIN course_arrange AS T2 ON T1.teacher_id = T2.teacher_id WHERE T1.age = 'Youngest'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.hometown FROM teacher AS T1 INNER JOIN course_arrange AS T2 ON T1.teacher_id = T2.teacher_id GROUP BY T1.hometown ORDER BY T1.age LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.hometown FROM teacher AS T1 GROUP BY T1.hometown
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(teacher_id) FROM teacher GROUP BY hometown
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.hometown FROM teacher AS T1 INNER JOIN course_arrange AS T2 ON T2.teacher_id = T1.teacher_id GROUP BY T1.hometown ORDER BY COUNT(T1.hometown) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.hometown FROM teacher AS T1 INNER JOIN course_arrange AS T2 ON T1.teacher_id = T2.teacher_id GROUP BY T2.hometown ORDER BY COUNT(T2.teacher_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.hometown FROM teacher AS T1 INNER JOIN course_arrange AS T2 ON T1.teacher_id = T2.teacher_id GROUP BY T1.hometown HAVING COUNT(T1.teacher_id) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.hometown FROM teacher AS T1 INNER JOIN course_arrange AS T2 ON T1.teacher_id = T2.teacher_id GROUP BY T1.hometown HAVING COUNT(T1.hometown) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, T1.course FROM course_arrange AS T1 INNER JOIN teacher AS T2 ON T1.teacher_id = T2.teacher_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM teacher AS T1 INNER JOIN course_arrange AS T2 ON T1.teacher_id = T2.teacher_id INNER JOIN course AS T3 ON T3.course_id = T2.course_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM teacher AS T1 INNER JOIN course_arrange AS T2 ON T1.teacher_id = T2.teacher_id INNER JOIN course AS T3 ON T2.course_id = T3.course_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, T1.course FROM course_arrange AS T1 INNER JOIN teacher AS T2 ON T1.teacher_id = T2.teacher_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM course_arrange AS T1 INNER JOIN teacher AS T2 ON T1.teacher_id = T2.teacher_id INNER JOIN course AS T3 ON T1.course_id = T3.course_id WHERE T3.course ='math'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM course_arrange AS T1 INNER JOIN teacher AS T2 ON T1.teacher_id = T2.teacher_id INNER JOIN course AS T3 ON T3.course_id = T1.course_id WHERE T3.course ='math'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, COUNT(T2.course_id) FROM teacher AS T1 INNER JOIN course_arrange AS T2 ON T1.teacher_id = T2.teacher_id GROUP BY T1.name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, COUNT(T2.course_id) FROM teacher AS T1 INNER JOIN course_arrange AS T2 ON T1.teacher_id = T2.teacher_id GROUP BY T1.name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM teacher AS T1 INNER JOIN course_arrange AS T2 ON T1.teacher_id = T2.teacher_id GROUP BY T1.teacher_id HAVING COUNT(T1.teacher_id) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM teacher AS T1 INNER JOIN course_arrange AS T2 ON T1.teacher_id = T2.teacher_id GROUP BY T1.teacher_id HAVING COUNT(T2.teacher_id) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.name FROM course_arrange AS T1 INNER JOIN teacher AS T2 ON T1.teacher_id = T2.teacher_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM course_arrange AS T1 INNER JOIN teacher AS T2 ON T1.teacher_id = T2.teacher_id WHERE T1.course_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.id) FROM visitor AS T1 WHERE T1.age < 30
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM visitor AS T2 WHERE T2.level_of_membership > 4 ORDER BY T2.level_of_membership DESC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T2.age) FROM visitor AS T1 INNER JOIN visit AS T2 ON T1.id = T2.visitor_id WHERE T1.level_of_membership <= 4
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, T2.level_of_membership FROM visit AS T1 INNER JOIN visitor AS T2 ON T1.visitor_id = T2.id WHERE T2.level_of_membership > 4 ORDER BY T2.age DESC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.museum_id, T1.name FROM museum AS T1 GROUP BY T1.museum_id ORDER BY COUNT(T1.museum_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(num_of_staff) FROM museum WHERE open_year LIKE '2008%'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.open_year, T2.num_of_staff FROM visit AS T1 INNER JOIN museum AS T2 ON T1.museum_id = T2.museum_id WHERE T1.visitor_id = 'id' AND T2.name = 'Plaza Museum'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM museum AS T1 INNER JOIN visit AS T2 ON T1.museum_id = T2.museum_id GROUP BY T1.name HAVING COUNT(T1.name) > ( SELECT MIN(num_of_staff) FROM museum WHERE open_year > '2010' )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.id, T1.name, T1.age FROM visitor AS T1 INNER JOIN visit AS T2 ON T1.id = T2.visitor_id GROUP BY T1.id, T1.name, T1.age HAVING COUNT(T2.visitor_id) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.id, T1.name, T1.level_of_membership FROM visitor AS T1 INNER JOIN visit AS T2 ON T1.id = T2.visitor_id ORDER BY T2.total_spent DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.museum_id, T1.name FROM museum AS T1 INNER JOIN visit AS T2 ON T1.museum_id = T2.museum_id GROUP BY T1.museum_id ORDER BY COUNT(T2.museum_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM museum AS T1 INNER JOIN visit AS T2 ON T1.museum_id = T2.museum_id WHERE T2.num_of_ticket = 0
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, T2.age FROM visit AS T1 INNER JOIN visitor AS T2 ON T1.visitor_id = T2.id ORDER BY T1.num_of_ticket DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T1.num_of_ticket) FROM visit AS T1 GROUP BY T1.num_of_ticket
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(T2.total_spent) FROM visitor AS T1 INNER JOIN visit AS T2 ON T1.id = T2.visitor_id WHERE T1.level_of_membership = 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM visitor AS T1 INNER JOIN visit AS T2 ON T1.id = T2.visitor_id INNER JOIN museum AS T3 ON T3.museum_id = T2.museum_id WHERE T3.open_year < '2009' INTERSECT SELECT T1.name FROM visitor AS T1 INNER JOIN visit AS T2 ON T1.id = T2.visitor_id INNER JOIN museum AS T3 ON T3.museum_id = T2.museum_id WHERE
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(id) FROM visitor WHERE id NOT IN ( SELECT visitor_id FROM visit WHERE museum_id IN ( SELECT museum_id FROM museum WHERE open_year > 2010 ) )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(museum_id) FROM museum WHERE open_year > 2013 INTERSECT SELECT COUNT(museum_id) FROM museum WHERE open_year < 2008
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(player_id) FROM players
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(player_id) FROM players
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(*) FROM matches
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(match_num) FROM matches
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.birth_date FROM players AS T1 INNER JOIN players AS T2 ON T1.country_code = T2.country_code WHERE T2.country_code = 'USA'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.birth_date FROM players AS T1 INNER JOIN players AS T2 ON T1.country_code = T2.country_code WHERE T1.first_name = T2.first_name AND T1.birth_date = T2.birth_date AND T1.country_code = 'USA'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(loser_age) FROM matches
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(loser_age) FROM matches
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T2.ranking) FROM matches AS T1 INNER JOIN rankings AS T2 ON T2.player_id = T1.winner_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(ranking) FROM rankings AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.winner_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MAX(T2.ranking) FROM matches AS T1 INNER JOIN rankings AS T2 ON T1.loser_id = T2.player_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MIN(ranking) FROM rankings
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.country_code) FROM players AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.country_code) FROM players AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.loser_name FROM matches AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.loser_name) FROM matches AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.tourney_name FROM matches AS T1 INNER JOIN players AS T2 ON T1.winner_id = T2.player_id GROUP BY T2.tourney_name HAVING COUNT(T1.match_num) > 10
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.tourney_name FROM matches AS T1 INNER JOIN tourney AS T2 ON T1.tourney_id = T2.tourney_id GROUP BY T2.tourney_name HAVING COUNT(T1.match_num) > 10
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.last_name FROM players AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.winner_id WHERE T2.year = 2013 INTERSECT SELECT T1.first_name, T1.last_name FROM players AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.winner_id WHERE T2.year = 2016
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.last_name FROM players AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.winner_id WHERE STRFTIME('%Y', T2.tourney_date) = '2013' INTERSECT SELECT T1.first_name, T1.last_name FROM players AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.winner_id WHERE STRFTIME('%Y', T2.tourney_date) = '
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.match_num) FROM matches AS T1 INNER JOIN players AS T2 ON T2.player_id = T1.loser_id WHERE T1.year = 2013 INTERSECT SELECT COUNT(DISTINCT T1.match_num) FROM matches AS T1 INNER JOIN players AS T2 ON T2.player_id = T1.loser_id WHERE T1.year = 2016
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT match_num) FROM matches WHERE YEAR = 2013 INTERSECT SELECT COUNT(DISTINCT match_num) FROM matches WHERE YEAR = 2016
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.country_code, T1.first_name FROM players AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.winner_id WHERE T2.tourney_name = 'WTA Championships' INTERSECT SELECT T1.country_code, T1.first_name FROM players AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.winner_id WHERE T2.tourney_name = 'Australian Open'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.country_code FROM players AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.winner_id WHERE T2.tourney_name = 'WTA Championships' INTERSECT SELECT T1.first_name, T1.country_code FROM players AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.winner_id WHERE T2.tourney_name = 'Australian Open'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.country_code FROM players AS T1 INNER JOIN rankings AS T2 ON T1.player_id = T2.player_id ORDER BY T2.ranking DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.country_code FROM players AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.loser_id WHERE T2.loser_age = ( SELECT MAX(loser_age) FROM matches )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT first_name, last_name FROM players ORDER BY birth_date
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.last_name FROM players AS T1 INNER JOIN players AS T2 ON T1.birth_date = T2.birth_date ORDER BY T1.birth_date
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.first_name, T2.last_name FROM players AS T1 INNER JOIN matches AS T2 ON T2.loser_id = T1.player_id WHERE T1.hand = 'L'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT first_name, last_name FROM players WHERE hand = 'left' ORDER BY birth_date
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.first_name, T2.country_code FROM rankings AS T1 INNER JOIN players AS T2 ON T1.player_id = T2.player_id ORDER BY T1.tours DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.country_code FROM players AS T1 INNER JOIN rankings AS T2 ON T1.player_id = T2.player_id ORDER BY T2.tours DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(year) FROM matches GROUP BY year ORDER BY COUNT(year) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT year FROM matches GROUP BY year ORDER BY COUNT(year) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.last_name, T3.ranking_points FROM players AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.winner_id INNER JOIN rankings AS T3 ON T1.player_id = T3.player_id GROUP BY T1.first_name, T1.last_name ORDER BY COUNT(T2.winner_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.last_name FROM players AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.winner_id GROUP BY T2.winner_id ORDER BY COUNT(T2.match_num) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.winner_name FROM rankings AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.winner_id WHERE T2.tourney_name = 'Australian Open' ORDER BY T1.ranking_points DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.winner_name FROM matches AS T1 INNER JOIN players AS T2 ON T2.player_id = T1.winner_id WHERE T1.tourney_name = 'Australian Open' GROUP BY T1.winner_name ORDER BY T2.winner_rank_points DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.loser_name, T1.winner_name FROM matches AS T1 INNER JOIN players AS T2 ON T1.loser_id = T2.player_id INNER JOIN players AS T3 ON T1.winner_id = T3.player_id WHERE T1.minutes = ( SELECT MAX(minutes) FROM matches )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.last_name FROM players AS T1 INNER JOIN matches AS T2 ON T2.winner_id = T1.player_id WHERE T2.minutes = ( SELECT MAX(minutes) FROM matches )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(r.ranking) AS avg_ranking, p.first_name FROM rankings r INNER JOIN players p ON r.player_id = p.player_id GROUP BY p.first_name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.first_name FROM rankings AS T1 INNER JOIN players AS T2 ON T1.player_id = T2.player_id GROUP BY T2.first_name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.first_name, SUM(T2.ranking_points) FROM rankings AS T1 INNER JOIN players AS T2 ON T1.player_id = T2.player_id GROUP BY T2.first_name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, SUM(T2.ranking_points) FROM players AS T1 INNER JOIN rankings AS T2 ON T1.player_id = T2.player_id GROUP BY T1.first_name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.country_code),  T1.country_code FROM players AS T1 GROUP BY T1.country_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.country_code) FROM players AS T1 GROUP BY T1.country_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.country_code FROM players AS T1 GROUP BY T1.country_code ORDER BY COUNT(T1.country_code) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.country_code FROM players AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.loser_id GROUP BY T2.country_code ORDER BY COUNT(T2.country_code) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.country_code FROM players AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.loser_id GROUP BY T2.country_code HAVING COUNT(T2.country_code) > 50
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.country_code FROM players AS T1 INNER JOIN rankings AS T2 ON T1.player_id = T2.player_id GROUP BY T1.country_code HAVING COUNT(T2.player_id) > 50
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.tours) FROM rankings AS T1 INNER JOIN rankings AS T2 ON T1.ranking_date = T2.ranking_date GROUP BY T1.ranking_date
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.ranking_date, COUNT(T1.tours) FROM rankings AS T1 GROUP BY T1.ranking_date
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT YEAR) FROM matches
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT year FROM matches GROUP BY year
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.first_name, T2.last_name, T1.ranking FROM rankings AS T1 INNER JOIN players AS T2 ON T2.player_id = T1.player_id WHERE T1.year = 2011 ORDER BY T2.hand = 'right' DESC, T1.ranking_points DESC LIMIT 3
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.last_name FROM players AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.winner_id ORDER BY T2.winner_age LIMIT 3
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.winner_name FROM matches AS T1 INNER JOIN players AS T2 ON T1.winner_id = T2.player_id WHERE T2.hand = 'L' AND T1.tourney_name = 'WTA Championships'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.hand) FROM players AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.winner_id WHERE T1.hand = 'Left' AND T2.tourney_name = 'WTA Championships'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.country_code, T1.birth_date FROM players AS T1 INNER JOIN matches AS T2 ON T1.player_id = T2.winner_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.country_code, T1.birth_date FROM players AS T1 INNER JOIN rankings AS T2 ON T1.player_id = T2.player_id ORDER BY T2.ranking_points DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(player_id) FROM players WHERE hand = 'Right' INTERSECT SELECT COUNT(player_id) FROM players WHERE hand = 'Left'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(hand) FROM players GROUP BY hand
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.id) FROM ship AS T1 INNER JOIN death AS T2 ON T1.id = T2.caused_by_ship_id WHERE T1.disposition_of_ship = 'Captured'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, T1.tonnage FROM ship AS T1 ORDER BY T1.name DESC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, T2.date, T2.result FROM death AS T1 INNER JOIN battle AS T2 ON T2.id = T1.caused_by_ship_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MAX(killed) FROM death INTERSECT SELECT MIN(killed) FROM death
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(injured) FROM death
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.killed FROM death AS T1 INNER JOIN ship AS T2 ON T1.caused_by_ship_id = T2.id WHERE T2.tonnage = 't'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, T1.result FROM battle AS T1 INNER JOIN death AS T2 ON T1.id = T2.lost_in_battle WHERE T1.bulgarian_commander!= 'Boril'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.id, T1.name FROM battle AS T1 INNER JOIN ship AS T2 ON T1.id = T2.lost_in_battle WHERE T2.ship_type = 'Brig'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.id, T1.name FROM battle AS T1 INNER JOIN death AS T2 ON T2.caused_by_ship_id = T1.id GROUP BY T1.id HAVING SUM(T2.killed) > 10
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.id, T2.name FROM death AS T1 INNER JOIN ship AS T2 ON T1.caused_by_ship_id = T2.id GROUP BY T2.id, T2.name ORDER BY SUM(T1.injured) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.name FROM death AS T1 INNER JOIN battle AS T2 ON T1.caused_by_ship_id = T2.id WHERE T1.caused_by_ship_id = 107 AND T1.killed = 104 AND T2.latin_commander = 'Baldwin I'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T2.result) FROM ship AS T1 INNER JOIN battle AS T2 ON T1.lost_in_battle = T2.id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.id) FROM battle AS T1 INNER JOIN ship AS T2 ON T1.id = T2.lost_in_battle WHERE T2.tonnage!= '225'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, T1.date FROM battle AS T1 INNER JOIN ship AS T2 ON T1.id = T2.lost_in_battle WHERE T2.name = 'Lettice' INTERSECT SELECT T1.name, T1.date FROM battle AS T1 INNER JOIN ship AS T2 ON T1.id = T2.lost_in_battle WHERE T2.name = 'HMS Atalanta'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, T2.result, T2.bulgarian_commander FROM death AS T1 INNER JOIN battle AS T2 ON T2.id = T1.lost_in_battle WHERE T2.location = 'English Channel'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.note FROM battle AS T1 INNER JOIN death AS T2 ON T1.id = T2.lost_in_battle WHERE T1.result LIKE '%East%'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.line_1, T1.line_2 FROM addresses AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT line_1, line_2 FROM addresses
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(course_id) FROM courses
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(course_id) FROM courses
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T3.course_description FROM courses AS T1 INNER JOIN sections AS T2 ON T1.course_id = T2.course_id INNER JOIN departments AS T3 ON T1.department_id = T3.department_id WHERE T1.course_name ='math'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T3.course_description FROM courses AS T1 INNER JOIN sections AS T2 ON T1.course_id = T2.course_id INNER JOIN departments AS T3 ON T1.department_id = T3.department_id WHERE T3.department_name = 'Math'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.zip_postcode FROM addresses AS T1 INNER JOIN students AS T2 ON T1.address_id = T2.current_address_id WHERE T2.city = 'Port Chelsea'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.zip_postcode FROM addresses AS T1 INNER JOIN other_address_details AS T2 ON T1.address_id = T2.address_id WHERE T2.port_chelsea = '1'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.department_name, T1.department_id FROM departments AS T1 INNER JOIN degree_programs AS T2 ON T1.department_id = T2.department_id GROUP BY T1.department_id ORDER BY COUNT(T1.department_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.department_name, T2.department_id FROM degree_programs AS T1 INNER JOIN departments AS T2 ON T1.department_id = T2.department_id GROUP BY T2.department_id ORDER BY COUNT(T1.degree_program_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T2.department_id) FROM degree_programs AS T1 INNER JOIN departments AS T2 ON T1.department_id = T2.department_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.department_id) FROM departments AS T1 INNER JOIN degree_programs AS T2 ON T1.department_id = T2.department_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T2.degree_summary_name) FROM degree_programs AS T1 INNER JOIN departments AS T2 ON T1.department_id = T2.department_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(degree_summary_name) FROM degree_programs
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(degree_program_id) FROM degree_programs AS T1 INNER JOIN departments AS T2 ON T1.department_id = T2.department_id WHERE T2.department_name = 'Engineering'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.degree_summary_name) FROM degree_programs AS T1 INNER JOIN departments AS T2 ON T1.department_id = T2.department_id WHERE T2.department_name = 'Engineering'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.section_name, T1.section_description FROM sections AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.section_name, T2.section_description FROM courses AS T1 INNER JOIN sections AS T2 ON T1.course_id = T2.course_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.course_name FROM courses AS T1 INNER JOIN sections AS T2 ON T1.course_id = T2.course_id GROUP BY T1.course_name HAVING COUNT(T2.course_id) <= 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.course_name, T1.course_id FROM courses AS T1 INNER JOIN sections AS T2 ON T1.course_id = T2.course_id GROUP BY T1.course_id HAVING COUNT(T2.section_id) < 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.section_name FROM sections AS T1 ORDER BY T1.section_name DESC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.section_name FROM courses AS T1 INNER JOIN sections AS T2 ON T1.course_id = T2.course_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.semester_name, T1.semester_id FROM semesters AS T1 INNER JOIN student_enrolment AS T2 ON T1.semester_id = T2.semester_id GROUP BY T1.semester_id ORDER BY COUNT(T1.semester_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.semester_name, T2.semester_id FROM student_enrolment AS T1 INNER JOIN semesters AS T2 ON T1.semester_id = T2.semester_id GROUP BY T2.semester_id ORDER BY COUNT(T1.student_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.department_description FROM departments AS T1 INNER JOIN courses AS T2 ON T1.department_id = T2.department_id WHERE T1.department_name LIKE '%the computer%'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.department_description FROM departments AS T1 INNER JOIN degree_programs AS T2 ON T1.department_id = T2.department_id WHERE T1.department_name LIKE '%computer%'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.middle_name, T1.last_name, T2.degree_program_id FROM students AS T1 INNER JOIN student_enrolment AS T2 ON T1.student_id = T2.student_id INNER JOIN degree_programs AS T3 ON T3.degree_program_id = T2.degree_program_id GROUP BY T1.first_name, T1.middle_name, T1.last_name, T2.degree_program_id HAVING COUNT(T2.degree_program_id) = 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.middle_name, T1.last_name, T1.student_id FROM students AS T1 INNER JOIN student_enrolment AS T2 ON T1.student_id = T2.student_id WHERE T2.degree_program_id = 2 GROUP BY T1.first_name, T1.middle_name, T1.last_name, T1.student_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.first_name, T2.middle_name, T2.last_name FROM degree_programs AS T1 INNER JOIN students AS T2 ON T1.degree_program_id = T2.student_id WHERE T1.degree_summary_name = 'Bachelor'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.middle_name, T1.last_name FROM students AS T1 INNER JOIN student_enrolment AS T2 ON T1.student_id = T2.student_id INNER JOIN degree_programs AS T3 ON T2.degree_program_id = T3.degree_program_id WHERE T3.degree_summary_name = 'Bachelors'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.degree_summary_name FROM student_enrolment AS T1 INNER JOIN degree_programs AS T2 ON T1.degree_program_id = T2.degree_program_id GROUP BY T2.degree_summary_name ORDER BY COUNT(T1.student_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.degree_summary_name FROM student_enrolment AS T1 INNER JOIN degree_programs AS T2 ON T1.degree_program_id = T2.degree_program_id GROUP BY T2.degree_summary_name ORDER BY COUNT(T2.degree_summary_name) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.degree_program_id, T1.degree_summary_name FROM degree_programs AS T1 INNER JOIN student_enrolment AS T2 ON T1.degree_program_id = T2.degree_program_id GROUP BY T1.degree_program_id ORDER BY COUNT(T1.degree_program_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.degree_program_id, T1.degree_summary_name FROM degree_programs AS T1 INNER JOIN student_enrolment AS T2 ON T1.degree_program_id = T2.degree_program_id GROUP BY T1.degree_program_id ORDER BY COUNT(T2.student_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.student_id, T1.first_name, T1.middle_name, T1.last_name, COUNT(T2.student_id) AS num_enrollments FROM students AS T1 INNER JOIN student_enrolment AS T2 ON T1.student_id = T2.student_id GROUP BY T1.student_id ORDER BY COUNT(T2.student_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.middle_name, T1.last_name, T1.student_id, COUNT(T2.student_id) FROM students AS T1 INNER JOIN student_enrolment AS T2 ON T1.student_id = T2.student_id GROUP BY T1.student_id ORDER BY COUNT(T2.student_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.semester_name FROM semesters AS T1 LEFT JOIN student_enrolment AS T2 ON T1.semester_id = T2.semester_id WHERE T2.semester_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.semester_name FROM student_enrolment AS T1 INNER JOIN semesters AS T2 ON T1.semester_id = T2.semester_id WHERE T1.student_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.course_name FROM student_enrolment_courses AS T1 INNER JOIN courses AS T2 ON T1.course_id = T2.course_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.course_name FROM courses AS T1 INNER JOIN student_enrolment_courses AS T2 ON T1.course_id = T2.course_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.course_name FROM student_enrolment_courses AS T1 INNER JOIN courses AS T2 ON T1.course_id = T2.course_id GROUP BY T2.course_name ORDER BY COUNT(T2.course_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.course_name FROM courses AS T1 INNER JOIN student_enrolment_courses AS T2 ON T1.course_id = T2.course_id GROUP BY T1.course_id ORDER BY COUNT(T1.course_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.last_name FROM students AS T1 INNER JOIN addresses AS T2 ON T1.current_address_id = T2.address_id WHERE T2.state_province_county = 'North Carolina' EXCEPT SELECT T1.last_name FROM students AS T1 INNER JOIN student_enrolment AS T2 ON T1.student_id = T2.student_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.last_name FROM addresses AS T1 INNER JOIN students AS T2 ON T1.address_id = T2.permanent_address_id WHERE T1.state_province_county = 'North Carolina' EXCEPT SELECT T3.last_name FROM degree_programs AS T1 INNER JOIN student_enrolment AS T2 ON T1.degree_program_id = T2.degree_program_id INNER JOIN students AS T3 ON T2.student_id = T3.student_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.transcript_date, T2.transcript_id FROM student_enrolment_courses AS T1 INNER JOIN transcripts AS T2 ON T1.student_enrolment_id = T2.transcript_id GROUP BY T2.transcript_id HAVING COUNT(T1.student_enrolment_id) >= 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.transcript_date, T1.transcript_id FROM transcripts AS T1 INNER JOIN transcript_contents AS T2 ON T1.transcript_id = T2.transcript_id GROUP BY T1.transcript_id, T1.transcript_date HAVING COUNT(T1.transcript_id) = 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.cell_mobile_number FROM students AS T1 INNER JOIN addresses AS T2 ON T1.current_address_id = T2.address_id WHERE T1.first_name = 'Timmothy' AND T1.last_name = 'Ward'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.cell_mobile_number FROM students AS T1 INNER JOIN students AS T2 ON T1.student_id = T2.student_id WHERE T2.first_name = 'Timmothy' AND T2.middle_name = 'Ward'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.middle_name, T1.last_name FROM students AS T1 WHERE T1.`date_first_registered` = ( SELECT MIN(T2.`date_first_registered`) FROM students AS T2 )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT first_name, middle_name, last_name FROM students ORDER BY date_first_registered LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T3.first_name, T3.middle_name, T3.last_name FROM semesters AS T1 INNER JOIN student_enrolment AS T2 ON T1.semester_id = T2.semester_id INNER JOIN students AS T3 ON T2.student_id = T3.student_id WHERE T1.semester_name = 'Graduation' ORDER BY T3.date_first_registered LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.first_name, T2.middle_name, T2.last_name FROM student_enrolment AS T1 INNER JOIN students AS T2 ON T1.student_id = T2.student_id ORDER BY T1.transcript_date LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.first_name FROM students AS T1 INNER JOIN addresses AS T2 ON T1.current_address_id = T2.address_id WHERE T1.current_address_id!= T1.permanent_address_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name FROM students AS T1 INNER JOIN addresses AS T2 ON T1.permanent_address_id = T2.address_id WHERE T2.line_1!= T1.line_1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.address_id FROM addresses AS T1 INNER JOIN students AS T2 ON T2.current_address_id = T1.address_id GROUP BY T1.address_id ORDER BY COUNT(T2.student_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.address_id, T1.line_1, T1.line_2 FROM addresses AS T1 INNER JOIN students AS T2 ON T1.address_id = T2.current_address_id GROUP BY T1.address_id ORDER BY COUNT(T1.address_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT CAST(SUM(transcript_date) AS REAL) / COUNT(transcript_id) FROM transcripts
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T1.transcript_date) FROM transcripts AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.transcript_date FROM transcripts AS T1 INNER JOIN transcript_contents AS T2 ON T1.transcript_id = T2.transcript_id ORDER BY T1.transcript_date LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MIN(T1.transcript_date), T1.other_details FROM transcripts AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(transcript_id) FROM transcripts
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(transcript_id) FROM transcripts
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MAX(transcript_date) FROM transcripts
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MAX(T2.transcript_date) FROM transcripts AS T1 INNER JOIN transcript_contents AS T2 ON T1.transcript_id = T2.transcript_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.student_course_id),  T1.student_course_id FROM transcript_contents AS T1 INNER JOIN student_enrolment_courses AS T2 ON T1.student_course_id = T2.student_course_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MAX(T1.course_id) FROM ( SELECT T1.course_id, COUNT(T2.transcript_id) AS num FROM courses AS T1 INNER JOIN transcript_contents AS T2 ON T1.course_id = T2.student_course_id GROUP BY T1.course_id ) AS T
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.transcript_date FROM student_enrolment_courses AS T1 INNER JOIN transcripts AS T2 ON T1.student_course_id = T2.transcript_id GROUP BY T2.transcript_date ORDER BY COUNT(T1.student_course_id) LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.transcript_id, T1.transcript_date FROM transcripts AS T1 INNER JOIN transcript_contents AS T2 ON T1.transcript_id = T2.transcript_id GROUP BY T1.transcript_id ORDER BY COUNT(T2.student_course_id) ASC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.semester_name FROM degree_programs AS T1 INNER JOIN semesters AS T2 ON T1.semester_id = T2.semester_id WHERE T1.degree_summary_name = 'Master' INTERSECT SELECT T2.semester_name FROM degree_programs AS T1 INNER JOIN semesters AS T2 ON T1.semester_id = T2.semester_id WHERE T1.degree_summary_name = 'Bachelor'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.semester_id FROM degree_programs AS T1 INNER JOIN semesters AS T2 ON T1.semester_id = T2.semester_id WHERE T1.degree_summary_name = 'Masters' INTERSECT SELECT T2.semester_id FROM degree_programs AS T1 INNER JOIN semesters AS T2 ON T1.semester_id = T2.semester_id WHERE T1.degree_summary_name = 'Bachelors'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.current_address_id) FROM addresses AS T1 INNER JOIN students AS T2 ON T1.address_id = T2.current_address_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.line_1 FROM students AS T1 INNER JOIN addresses AS T2 ON T1.permanent_address_id = T2.address_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.middle_name, T1.last_name FROM students AS T1 ORDER BY T1.first_name DESC, T1.middle_name DESC, T1.last_name DESC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT other_student_details FROM students ORDER BY last_name DESC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.section_name FROM courses AS T1 INNER JOIN sections AS T2 ON T1.course_id = T2.course_id WHERE T1.course_name = 'h'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.section_description FROM sections AS T1 INNER JOIN courses AS T2 ON T1.course_id = T2.course_id WHERE T1.section_name = 'h'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.first_name FROM addresses AS T1 INNER JOIN students AS T2 ON T1.address_id = T2.permanent_address_id WHERE T1.country = 'Haiti' OR T2.cell_mobile_number = '09700166582'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.first_name FROM students AS T1 INNER JOIN addresses AS T2 ON T1.permanent_address_id = T2.address_id WHERE T2.country = 'Haiti' OR T1.cell_mobile_number = '09700166582'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT title FROM cartoon
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT title FROM cartoon
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT title FROM cartoon AS T1 INNER JOIN tv_series AS T2 ON T1.channel = T2.channel WHERE T1.directed_by = 'Ben Jones'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.title FROM cartoon AS T1 INNER JOIN directed_by AS T2 ON T1.id = T2.cartoon_id WHERE T2.directed_by = 'Ben Jones'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T2.title) FROM written_by AS T1 INNER JOIN cartoon AS T2 ON T1.channel = T2.channel WHERE T1.written_by = 'Joseph Kuhr'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(title) FROM cartoon AS T1 INNER JOIN written_by AS T2 ON T1.id = T2.id WHERE T2 = 'Joseph Kuhr'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.title, T1.directed_by FROM cartoon AS T1 INNER JOIN tv_series AS T2 ON T2.channel = T1.channel ORDER BY T1.original_air_date
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.title, T1.directed_by FROM cartoon AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.title FROM cartoon AS T1 INNER JOIN tv_channel AS T2 ON T1.channel = T2.id WHERE T1.directed_by = 'Ben Jones' INTERSECT SELECT DISTINCT T2.title FROM cartoon AS T1 INNER JOIN tv_channel AS T2 ON T1.channel = T2.id WHERE T1.directed_by = 'Brandon Vietti'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.title FROM cartoon AS T1 INNER JOIN tv_channel AS T2 ON T1.channel = T2.id WHERE T1.directed_by = 'Ben Jones' OR T1.directed_by = 'Brandon Vietti'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT country, COUNT(id) FROM tv_channel GROUP BY country ORDER BY COUNT(id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T2.id), T2.country FROM tv_channel AS T1 INNER JOIN tv_channel AS T2 ON T1.id = T2.id GROUP BY T2.country ORDER BY COUNT(T2.id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT series_name) FROM tv_channel
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT series_name) FROM tv_channel UNION SELECT COUNT(DISTINCT content) FROM tv_channel
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.content FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T1.id = T2.channel WHERE T1.series_name = 'Sky Radio'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.content FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T1.id = T2.channel WHERE T2.channel = 'Sky Radio'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.package_option FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T2.channel = T1.id WHERE T2.series_name = 'Sky Radio'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.package_option FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T1.id = T2.channel WHERE T1.series_name = 'Sky Radio'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(language) FROM tv_channel WHERE language = 'English'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(language) FROM tv_channel WHERE language = 'English'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.language, COUNT(T1.id) FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T2.channel = T1.id GROUP BY T1.language ORDER BY COUNT(T1.id) LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.language FROM tv_channel AS T1 INNER JOIN ( SELECT T2.language, COUNT(T2.id) AS num FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T1.id = T2.channel GROUP BY T2.language ORDER BY T2.language DESC LIMIT 1 ) AS T3 ON T1.language = T3.language
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.language, COUNT(T2.id) FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T1.id = T2.channel GROUP BY T1.language
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.language) FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T1.id = T2.channel GROUP BY T1.language
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.series_name FROM cartoon AS T1 INNER JOIN tv_channel AS T2 ON T1.channel = T2.id WHERE T1.title = 'The Rise of the Blue Beetle!'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T3.series_name FROM cartoon AS T1 INNER JOIN tv_channel AS T2 ON T2.id = T1.channel INNER JOIN tv_series AS T3 ON T3.channel = T2.id WHERE T1.title = 'The Rise of the Blue Beetle'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.title FROM tv_channel AS T1 INNER JOIN cartoon AS T2 ON T1.id = T2.channel WHERE T1.series_name = 'Sky Radio'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.title FROM cartoon AS T1 INNER JOIN tv_channel AS T2 ON T2.id = T1.channel WHERE T2.series_name = 'Sky Radio'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.episode FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T1.id = T2.channel WHERE T1.language = 'English' GROUP BY T2.episode ORDER BY COUNT(T2.episode) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.episode FROM tv_series AS T1 INNER JOIN tv_channel AS T2 ON T2.id = T1.channel
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.episode, T2.rating FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T1.id = T2.channel WHERE T1.content = 'Drama' ORDER BY T2.rating DESC LIMIT 3
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.episode, T2.rating FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T1.id = T2.channel ORDER BY T2.rating DESC LIMIT 3
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MIN(share) FROM tv_series
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MAX(share) FROM tv_series
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.episode FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T1.id = T2.channel WHERE T2.episode = 'A Love of a Lifetime'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.air_date FROM cartoon AS T1 INNER JOIN tv_series AS T2 ON T1.channel = T2.channel WHERE T1.title = 'A Love of a Lifetime'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.weekly_rank FROM tv_series AS T1 INNER JOIN tv_channel AS T2 ON T1.channel = T2.id WHERE T1.episode = 'A Love of a Lifetime'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.weekly_rank FROM tv_series AS T1 INNER JOIN tv_channel AS T2 ON T1.channel = T2.id WHERE T1.episode = 'A Love of a Lifetime'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.channel FROM tv_series AS T1 INNER JOIN tv_channel AS T2 ON T2.id = T1.channel WHERE T1.episode = 'A Love of a Lifetime'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.series_name FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T2.channel = T1.id WHERE T2.episode = 'A Love of a Lifetime'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.episode FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T1.id = T2.channel WHERE T1.series_name = 'Sky Radio'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.episode FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T1.id = T2.channel WHERE T1.series_name = 'Sky Radio'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(title) FROM cartoon AS T1 INNER JOIN cartoon AS T2 ON T1.directed_by = T2.directed_by WHERE T1.directed_by IN ('Darrell Van Citters', 'Brian Sheesley')
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T2.title) FROM directed_by AS T1  INNER JOIN cartoon AS T2  ON T1.id = T2.directed_by
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.production_code, T2.channel FROM tv_channel AS T1 INNER JOIN cartoon AS T2 ON T1.id = T2.channel ORDER BY T2.original_air_date DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.production_code, T2.channel FROM tv_series AS T1 INNER JOIN cartoon AS T2 ON T1.channel = T2.channel ORDER BY T1.id DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.package_option, T2.series_name FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T1.id = T2.channel WHERE T1.hight_definition_tv = 'TRUE'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.package_option, T2.series_name FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T1.id = T2.channel WHERE T1.hight_definition_tv = 'Yes'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.country FROM tv_channel AS T1 INNER JOIN cartoon AS T2 ON T1.id = T2.channel WHERE T2.written_by = 'Todd Casey'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T3.country FROM tv_series AS T1 INNER JOIN tv_channel AS T2 ON T2.id = T1.channel INNER JOIN cartoon AS T3 ON T3.channel = T2.id WHERE T1.written_by = 'Todd Casey'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.country FROM tv_channel AS T1 INNER JOIN cartoon AS T2 ON T2.channel = T1.id WHERE T2.written_by = 'Todd Casey'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.country FROM tv_channel AS T1 INNER JOIN cartoon AS T2 ON T1.id = T2.channel WHERE T2.written_by = 'Todd Casey'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.series_name, T1.country FROM tv_channel AS T1 INNER JOIN cartoon AS T2 ON T1.id = T2.channel WHERE T2.directed_by = 'Ben Jones' INTERSECT SELECT T1.series_name, T1.country FROM tv_channel AS T1 INNER JOIN cartoon AS T2 ON T1.id = T2.channel WHERE T2.directed_by = 'Michael Chang'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.series_name, T1.country FROM tv_channel AS T1 INNER JOIN cartoon AS T2 ON T1.id = T2.channel WHERE T2.directed_by = 'Ben Jones' INTERSECT SELECT T1.series_name, T1.country FROM tv_channel AS T1 INNER JOIN cartoon AS T2 ON T1.id = T2.channel WHERE T2.directed_by = 'Michael Chang'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.pixel_aspect_ratio_par, T2.country FROM tv_channel AS T1 INNER JOIN tv_series AS T2 ON T1.id = T2.channel WHERE T1.language!= 'English'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.pixel_aspect_ratio_par, T1.country FROM tv_channel AS T1 WHERE T1.language!= 'English'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.id FROM tv_channel AS T1 INNER JOIN tv_channel AS T2 ON T1.country = T2.country WHERE T1.id!= T2.id GROUP BY T2.id HAVING COUNT(T2.id) > 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT id FROM tv_channel GROUP BY id HAVING COUNT(id) > 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.id FROM tv_channel AS T1 INNER JOIN cartoon AS T2 ON T1.id = T2.channel WHERE T2.directed_by!= 'Ben Jones'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.id FROM tv_channel AS T1 INNER JOIN cartoon AS T2 ON T1.id = T2.channel WHERE T2.directed_by!= 'Ben Jones'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.package_option FROM tv_channel AS T1 INNER JOIN cartoon AS T2 ON T2.channel = T1.id WHERE T2.directed_by!= 'Ben Jones'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.package_option FROM tv_channel AS T1 INNER JOIN cartoon AS T2 ON T1.id = T2.channel WHERE T2.directed_by!= 'Ben Jones'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(poker_player_id) FROM poker_player
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(poker_player_id) FROM poker_player
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.earnings FROM poker_player AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.earnings FROM poker_player AS T1 ORDER BY T1.earnings DESC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.final_table_made, T1.best_finish FROM poker_player AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.final_table_made, T1.best_finish FROM poker_player AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T2.earnings) FROM people AS T1 INNER JOIN poker_player AS T2 ON T1.people_id = T2.people_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T1.earnings) FROM poker_player AS T1 GROUP BY T1.earnings
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.money_rank FROM poker_player AS T1 INNER JOIN people AS T2 ON T1.people_id = T2.people_id ORDER BY T1.earnings DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MAX(money_rank) FROM poker_player
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MAX(final_table_made) FROM poker_player WHERE earnings < 200000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MAX(final_table_made) FROM poker_player WHERE earnings < 200000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM poker_player AS T1 INNER JOIN people AS T2 ON T1.people_id = T2.people_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM people AS T1 INNER JOIN poker_player AS T2 ON T1.people_id = T2.people_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM poker_player AS T1 INNER JOIN people AS T2 ON T1.people_id = T2.people_id WHERE T1.earnings > 300000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM poker_player AS T1 INNER JOIN people AS T2 ON T1.people_id = T2.people_id WHERE T1.earnings > 300000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM people AS T1 INNER JOIN poker_player AS T2 ON T1.people_id = T2.people_id ORDER BY T2.final_table_made ASC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM poker_player AS T1 INNER JOIN people AS T2 ON T1.people_id = T2.people_id ORDER BY T1.final_table_made ASC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.birth_date FROM poker_player AS T1 INNER JOIN people AS T2 ON T1.people_id = T2.people_id ORDER BY T1.earnings ASC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.birth_date FROM poker_player AS T1 INNER JOIN people AS T2 ON T1.people_id = T2.people_id ORDER BY T1.earnings LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.money_rank FROM poker_player AS T1 INNER JOIN people AS T2 ON T1.people_id = T2.people_id ORDER BY T2.height DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.money_rank FROM poker_player AS T1 INNER JOIN people AS T2 ON T1.people_id = T2.people_id ORDER BY T2.height DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(T1.earnings) / COUNT(T1.earnings) FROM poker_player AS T1 INNER JOIN people AS T2 ON T1.people_id = T2.people_id WHERE T2.height > 200
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T2.earnings) FROM people AS T1 INNER JOIN poker_player AS T2 ON T1.people_id = T2.people_id WHERE T1.height > 200
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM poker_player AS T1 INNER JOIN people AS T2 ON T1.people_id = T2.people_id ORDER BY T1.earnings DESC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM poker_player AS T1 INNER JOIN people AS T2 ON T1.people_id = T2.people_id ORDER BY T1.earnings DESC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.nationality, COUNT(T1.people_id) FROM people AS T1 GROUP BY T1.nationality
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.nationality) FROM people AS T1 GROUP BY T1.nationality
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.nationality FROM people AS T1 INNER JOIN poker_player AS T2 ON T1.people_id = T2.people_id GROUP BY T1.nationality ORDER BY COUNT(T1.nationality) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.nationality FROM people AS T1 INNER JOIN poker_player AS T2 ON T1.people_id = T2.people_id GROUP BY T2.nationality ORDER BY COUNT(T1.people_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.nationality FROM people AS T1 INNER JOIN poker_player AS T2 ON T1.people_id = T2.people_id GROUP BY T1.nationality HAVING COUNT(T1.people_id) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.nationality FROM people AS T1 INNER JOIN poker_player AS T2 ON T1.people_id = T2.people_id GROUP BY T1.nationality HAVING COUNT(T1.people_id) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, T1.birth_date FROM people AS T1 ORDER BY T1.name ASC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, T2.birth_date FROM people AS T2 ORDER BY T2.name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM people AS T1 INNER JOIN poker_player AS T2 ON T1.people_id = T2.people_id WHERE T1.nationality!= 'Russia'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM poker_player AS T1 INNER JOIN people AS T2 ON T1.people_id = T2.people_id WHERE T2.nationality!= 'Russia'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT name FROM people WHERE people_id NOT IN ( SELECT people_id FROM poker_player )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT name FROM people WHERE people_id NOT IN ( SELECT people_id FROM poker_player )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.nationality) FROM people AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T2.nationality) FROM people AS T1 INNER JOIN poker_player AS T2 ON T1.people_id = T2.people_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.name FROM country AS T1 INNER JOIN country AS T2 ON T1.code = T2.code WHERE T1.indepyear > 1950
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM country AS T1 INNER JOIN country AS T2 ON T1.code = T2.code WHERE T1.indepyear > 1950
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(*) FROM country WHERE governmentform = 'Republic'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(code) FROM country WHERE governmentform = 'Republic'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(surfacearea) FROM country WHERE region = 'Caribbean'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(surfacearea) FROM country WHERE region = 'Carribean'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.continent FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.name = 'Anguilla'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.continent FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.name = 'Anguilla'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.region FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.name = 'Kabul'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.region FROM city AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.name = 'Kabul'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.language FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.name = 'Aruba' GROUP BY T2.language ORDER BY T2.percentage DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.language FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.name = 'Aruba' ORDER BY T2.percentage DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.population, T2.lifeexpectancy FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.name = 'Brazil'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.population, T1.lifeexpectancy FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T2.language = 'Brazil'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.region, T2.population FROM country AS T1 INNER JOIN country AS T2 ON T1.code = T2.code WHERE T1.name = 'Angola'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.region, T1.population FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.name = 'Angola'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(lifeexpectancy) FROM country WHERE region = 'Central Africa'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(lifeexpectancy) FROM country WHERE continent = 'Central Africa'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T2.continent = 'Asia' AND T1.percentage = ( SELECT MIN(percentage) FROM countrylanguage WHERE countrycode IN ( SELECT code FROM country WHERE continent = 'Asia' ) )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.continent = 'Asia' AND T1.lifeexpectancy = ( SELECT MIN(T1.lifeexpectancy) FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.continent = 'Asia' )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(T1.population),  MAX(T2.gnp) FROM country AS T1 INNER JOIN country AS T2 ON T1.code = T2.code WHERE T1.continent = 'Asia'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(c1.id) FROM country AS c1 INNER JOIN city AS c2 ON c1.code = c2.countrycode WHERE c1.continent = 'Asia'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(lifeexpectancy) FROM country WHERE continent = 'Africa' INTERSECT SELECT lifeexpectancy FROM country WHERE governmentform = 'Republic'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(T1.lifeexpectancy) / COUNT(T1.code) FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T2.language = 'English' AND T1.continent = 'Africa'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(surfacearea) FROM country WHERE continent = 'Asia'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(surfacearea) FROM country WHERE continent = 'Asia' OR continent = 'Europe'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(id) FROM city WHERE district = 'Gelderland'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(T2.population) FROM country AS T1 INNER JOIN city AS T2 ON T1.code = T2.countrycode WHERE T1.name = 'Netherlands' AND T2.district = 'Gelderland'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(gnp), SUM(population) FROM country WHERE governmentform = 'US Territory'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T2.gnp),  SUM(T2.population) FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.governmentform = 'US Territory'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(language) FROM countrylanguage
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T2.language) FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.governmentform) FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.continent = 'Africa'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(governmentform) FROM country WHERE continent = 'Africa'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(T1.percentage) FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T2.name = 'Aruba'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.language) FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T2.name = 'Aruba'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.language) FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T2.name = 'Afghanistan' AND T1.isofficial = 'T'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T2.language) FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.name = 'Afghanistan' AND T2.isofficial = 'T'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code GROUP BY T2.name ORDER BY COUNT(T2.name) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode GROUP BY T1.name ORDER BY COUNT(T2.language) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.continent FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode GROUP BY T1.continent ORDER BY COUNT(T1.continent) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.continent FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code GROUP BY T2.continent ORDER BY COUNT(T1.language) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(CASE WHEN T1.language = 'English' THEN 1 ELSE 0 END) FROM countrylanguage AS T1 INNER JOIN countrylanguage AS T2 ON T1.countrycode = T2.countrycode WHERE T1.language = 'Dutch'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.language) FROM countrylanguage AS T1 INNER JOIN countrylanguage AS T2 ON T1.countrycode = T2.countrycode WHERE T1.language = 'English' AND T2.language = 'Dutch'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.language FROM countrylanguage AS T1 INNER JOIN countrylanguage AS T2 ON T1.countrycode = T2.countrycode WHERE T1.language = 'English' AND T2.language = 'French'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language = 'English' INTERSECT SELECT T2.name FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language = 'French'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language = 'English' INTERSECT SELECT T2.name FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language = 'French'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language = 'English' INTERSECT SELECT T2.name FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language = 'French'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.continent) FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T2.language = 'Chinese'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T2.continent) FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language = 'Chinese'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.region FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T2.language = 'English' OR T2.language = 'Dutch'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.region FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language = 'Dutch' INTERSECT SELECT DISTINCT T2.region FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language = 'English'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T2.language = 'English' OR T2.language = 'Dutch'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language = 'English' OR T1.language = 'Dutch'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T3.language FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode INNER JOIN countrylanguage AS T3 ON T3.countrycode = T1.code WHERE T1.continent = 'Asia' GROUP BY T3.language ORDER BY SUM(T3.percentage) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.language FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.continent = 'Asia' GROUP BY T2.language ORDER BY COUNT(T2.countrycode) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.language FROM countrylanguage AS T1 INNER JOIN countrylanguage AS T2 ON T1.countrycode = T2.countrycode WHERE T1.percentage = 100 AND T1.language = T2.language GROUP BY T2.language HAVING COUNT(T2.countrycode) = 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.language FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T2.code = T1.countrycode WHERE T2.governmentform = 'Republic' GROUP BY T1.language HAVING COUNT(T1.countrycode) = 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T3.name FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code INNER JOIN city AS T3 ON T2.code = T3.countrycode WHERE T1.language = 'English' AND T1.isofficial = 'T' ORDER BY T3.population DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM countrylanguage AS T1 INNER JOIN city AS T2 ON T1.countrycode = T2.countrycode WHERE T1.language = 'English' ORDER BY T2.population DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, T2.population, T2.lifeexpectancy FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.continent = 'Asia' ORDER BY T1.surfacearea DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, T2.population, T2.lifeexpectancy FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T2.language = 'English' AND T1.continent = 'Asia' ORDER BY T1.surfacearea DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T2.lifeexpectancy) FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.isofficial = 'F' AND T1.language = 'English'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(T2.lifeexpectancy) / COUNT(T2.code) FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language!= 'English'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(CASE WHEN T1.language = 'English' THEN T2.population ELSE 0 END) FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.code = T2.code WHERE T1.isofficial = 'F'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T2.population) FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language!= 'English'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.language FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.headofstate = 'Beatrix'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.language FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.headofstate = 'Beatrix'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T2.language) FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.indepyear < 1930 AND T2.isofficial = 'T'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(T1.percentage) FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T2.indepyear < 1930
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.surfacearea FROM country AS T1 INNER JOIN country AS T2 ON T1.continent = T2.continent WHERE T1.surfacearea < ( SELECT MAX(surfacearea) FROM country WHERE continent = 'Europe' )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.surfacearea FROM country AS T1 INNER JOIN country AS T2 ON T1.code = T2.code WHERE T1.continent = 'Europe' AND T1.surfacearea < T2.surfacearea
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM country AS T1 INNER JOIN city AS T2 ON T1.code = T2.countrycode WHERE T1.continent = 'Africa' AND T1.population < ( SELECT MAX(T3.population) FROM country AS T3 INNER JOIN city AS T4 ON T3.code = T4.countrycode WHERE T3.continent = 'Asia' )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM country AS T1 INNER JOIN country AS T2 ON T1.continent = T2.continent WHERE T1.population < ( SELECT MAX(T3.population) FROM country AS T3 INNER JOIN countrylanguage AS T4 ON T3.code = T4.countrycode WHERE T4.language = 'English' )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM country AS T1 INNER JOIN country AS T2 ON T1.continent = T2.continent WHERE T1.surfacearea > 3.59e+006
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM country AS T1 INNER JOIN country AS T2 ON T1.surfacearea > T2.surfacearea WHERE T1.continent = 'Asia' AND T2.continent = 'Africa'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.countrycode FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language!= 'English'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.code FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T2.language!= 'English'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.code FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T2.language!= 'English'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.countrycode FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language!= 'English'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.code FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T2.language!= 'English' AND T1.governmentform!= 'Republic'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.code FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T2.language!= 'English' EXCEPT SELECT DISTINCT T1.code FROM country AS T1 WHERE T1.governmentform = 'Republic'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM city AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code INNER JOIN countrylanguage AS T3 ON T2.code = T3.countrycode WHERE T2.continent = 'Europe' AND T3.language = 'English' AND T3.isofficial = 'N'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language = 'English' AND T2.continent = 'Europe' EXCEPT SELECT T2.name FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.isofficial = 'TRUE' AND T2.continent = 'Europe'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.name FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code INNER JOIN city AS T3 ON T2.code = T3.countrycode WHERE T1.language = 'Chinese' AND T2.continent = 'Asia'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.name FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T2.code = T1.countrycode WHERE T2.continent = 'Asia' AND T1.isofficial = 'T' AND T1.language = 'Chinese'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, T2.indepyear, T2.surfacearea FROM country AS T2 INNER JOIN countrylanguage AS T1 ON T1.countrycode = T2.code WHERE T2.population = ( SELECT MIN(surfacearea) FROM country WHERE population = ( SELECT MIN(surfacearea) FROM country ) )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, T1.indepyear, T1.surfacearea FROM country AS T1 INNER JOIN ( SELECT T2.population, T2.code FROM country AS T2 ORDER BY T2.population ASC LIMIT 1 ) AS T3 ON T1.code = T3.code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.population, T2.name, T3.headofstate FROM country AS T1 INNER JOIN city AS T2 ON T1.code = T2.countrycode INNER JOIN countrylanguage AS T3 ON T3.countrycode = T2.countrycode WHERE T1.surfacearea = ( SELECT MAX(surfacearea) FROM country )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, T1.population, T3.headofstate FROM country AS T3 INNER JOIN country AS T1 ON T1.code = T3.code WHERE T1.surfacearea = ( SELECT MAX(surfacearea) FROM country )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, COUNT(T2.language) FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode GROUP BY T1.name HAVING COUNT(T2.language) >= 3
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, COUNT(T1.language) FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code GROUP BY T1.countrycode HAVING COUNT(T1.language) > 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T2.name) FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.percentage > 50
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(CASE WHEN T1.population > AVG(T1.population) THEN 1 ELSE 0 END) FROM city AS T1 GROUP BY T1.district
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.governmentform, SUM(T1.population) FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.lifeexpectancy > 72 GROUP BY T2.governmentform
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.governmentform, SUM(T1.population) FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.lifeexpectancy > 72
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T1.lifeexpectancy),  SUM(T1.population) FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.continent = 'Asia'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.continent, SUM(T1.population), AVG(T1.lifeexpectancy) FROM country AS T1 INNER JOIN city AS T2 ON T1.code = T2.countrycode WHERE T1.lifeexpectancy < 72 GROUP BY T2.continent
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT name, surfacearea FROM country ORDER BY surfacearea DESC LIMIT 5
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT name, surfacearea FROM country ORDER BY surfacearea DESC LIMIT 5
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT name FROM country ORDER BY population DESC LIMIT 3
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM country AS T1 INNER JOIN city AS T2 ON T1.code = T2.countrycode ORDER BY T2.population DESC LIMIT 3
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT name FROM country ORDER BY population LIMIT 3
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM country AS T1 INNER JOIN country AS T2 ON T1.code = T2.code ORDER BY T1.population LIMIT 3
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.code) FROM country AS T1 INNER JOIN city AS T2 ON T1.code = T2.countrycode WHERE T1.continent = 'Asia'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.code) FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.continent = 'Asia'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT name FROM country WHERE continent = 'Europe' AND population = 80000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM country AS T1 INNER JOIN city AS T2 ON T1.code = T2.countrycode WHERE T1.continent = 'Europe' AND T2.population = 80000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(T1.population) / COUNT(T1.code), SUM(T1.surfacearea) / COUNT(T1.code) FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.continent = 'North America' AND T1.surfacearea > 3000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(T1.population) FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T1.continent = 'North America' AND T1.surfacearea > 3000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT name FROM city WHERE population BETWEEN 160000 AND 900000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.percentage BETWEEN 100 AND 100 AND T2.population BETWEEN 160000 AND 900000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.language FROM countrylanguage AS T1 INNER JOIN countrylanguage AS T2 ON T1.language = T2.language WHERE T1.percentage = 100 GROUP BY T2.language ORDER BY COUNT(T2.countrycode) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.language FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode GROUP BY T2.language ORDER BY COUNT(T2.language) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.language FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T2.code = T1.countrycode ORDER BY T1.percentage DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.code FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode ORDER BY T2.percentage DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T2.countrycode) FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language = 'Spanish' GROUP BY T1.countrycode ORDER BY T1.percentage DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.countrycode) FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language = 'Spanish'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.code FROM countrylanguage AS T1 INNER JOIN country AS T2 ON T1.countrycode = T2.code WHERE T1.language = 'Spanish' ORDER BY T1.percentage DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.code FROM country AS T1 INNER JOIN countrylanguage AS T2 ON T1.code = T2.countrycode WHERE T2.language = 'Spanish' AND T2.isofficial = 'T'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(conductor_id) FROM conductor
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(conductor_id) FROM conductor
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM conductor AS T1 INNER JOIN performance AS T2 ON T1.conductor_id = T2.orchestra_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM conductor AS T1 INNER JOIN conductor AS T2 ON T1.age = T2.age
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT name FROM conductor WHERE nationality!= 'USA'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM conductor AS T1 WHERE T1.nationality!= 'USA'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.record_company FROM orchestra AS T1 INNER JOIN performance AS T2 ON T1.orchestra_id = T2.orchestra_id ORDER BY T1.year_of_founded DESC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.record_company FROM orchestra AS T1 INNER JOIN performance AS T2 ON T1.orchestra_id = T2.orchestra_id ORDER BY T1.year_of_founded DESC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T2.attendance) FROM show AS T1 INNER JOIN performance AS T2 ON T1.performance_id = T2.performance_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T2.attendance) FROM performance AS T1 INNER JOIN show AS T2 ON T2.performance_id = T1.performance_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MAX(T1.share) FROM performance AS T1 INNER JOIN show AS T2 ON T1.performance_id = T2.performance_id WHERE T1.type = 'Live final'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MAX(T1.share) FROM performance AS T1 INNER JOIN show AS T2 ON T1.performance_id = T2.performance_id WHERE T1.type <> 'Live final'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.nationality) FROM conductor AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.nationality) FROM conductor AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM conductor AS T1 INNER JOIN conductor AS T2 ON T1.year_of_work = T2.year_of_work ORDER BY T1.year_of_work DESC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM performance AS T1 INNER JOIN conductor AS T2 ON T1.orchestra_id = T2.conductor_id GROUP BY T2.name ORDER BY COUNT(T2.year_of_work) DESC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM conductor AS T1 INNER JOIN conductor AS T2 ON T1.year_of_work = T2.year_of_work ORDER BY T1.year_of_work DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM conductor AS T1 INNER JOIN performance AS T2 ON T2.orchestra_id = T1.conductor_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM conductor AS T1 INNER JOIN orchestra AS T2 ON T2.conductor_id = T1.conductor_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM conductor AS T1 INNER JOIN orchestra AS T2 ON T1.conductor_id = T2.conductor_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM orchestra AS T1 INNER JOIN conductor AS T2 ON T1.conductor_id = T2.conductor_id GROUP BY T1.conductor_id HAVING COUNT(T1.conductor_id) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM conductor AS T1 INNER JOIN orchestra AS T2 ON T1.conductor_id = T2.conductor_id GROUP BY T2.conductor_id HAVING COUNT(T2.conductor_id) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM conductor AS T1 INNER JOIN orchestra AS T2 ON T1.conductor_id = T2.conductor_id GROUP BY T1.name ORDER BY COUNT(T2.orchestra_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM conductor AS T1 INNER JOIN orchestra AS T2 ON T1.conductor_id = T2.conductor_id GROUP BY T1.name ORDER BY COUNT(T1.name) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM orchestra AS T1 INNER JOIN conductor AS T2 ON T1.conductor_id = T2.conductor_id WHERE T1.year_of_founded > 2008
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM conductor AS T1 INNER JOIN orchestra AS T2 ON T1.conductor_id = T2.conductor_id WHERE T2.year_of_founded > 2008
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.record_company, COUNT(T1.orchestra_id) FROM orchestra AS T1 INNER JOIN conductor AS T2 ON T1.conductor_id = T2.conductor_id GROUP BY T2.record_company
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(orchestra_id) FROM orchestra GROUP BY record_company
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT major_record_format FROM orchestra GROUP BY major_record_format ORDER BY COUNT(major_record_format) ASC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.major_record_format FROM performance AS T1 INNER JOIN orchestra AS T2 ON T1.orchestra_id = T2.orchestra_id GROUP BY T2.major_record_format ORDER BY COUNT(T2.major_record_format) DESC
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.record_company FROM orchestra AS T1 INNER JOIN performance AS T2 ON T1.orchestra_id = T2.orchestra_id GROUP BY T2.record_company ORDER BY COUNT(T2.orchestra_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT record_company FROM orchestra GROUP BY record_company ORDER BY COUNT(orchestra_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.orchestra FROM performance AS T1 INNER JOIN orchestra AS T2 ON T1.orchestra_id = T2.orchestra_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.orchestra FROM orchestra AS T1 LEFT JOIN performance AS T2 ON T1.orchestra_id = T2.orchestra_id WHERE T2.performance_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.record_company FROM orchestra AS T1 INNER JOIN orchestra AS T2 ON T1.orchestra_id = T2.orchestra_id WHERE T1.year_of_founded < 2003 AND T2.year_of_founded > 2003
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.record_company FROM orchestra AS T1 INNER JOIN performance AS T2 ON T1.orchestra_id = T2.orchestra_id WHERE T1.year_of_founded < 2003 INTERSECT SELECT DISTINCT T1.record_company FROM orchestra AS T1 INNER JOIN performance AS T2 ON T1.orchestra_id = T2.orchestra_id WHERE T1.year_of_founded > 2003
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(orchestra_id) FROM orchestra WHERE major_record_format = 'CD' INTERSECT SELECT COUNT(orchestra_id) FROM orchestra WHERE major_record_format = 'DVD'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(orchestra_id) FROM orchestra WHERE major_record_format = 'CD' OR major_record_format = 'DVD'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.year_of_founded FROM orchestra AS T1 INNER JOIN performance AS T2 ON T1.orchestra_id = T2.orchestra_id GROUP BY T1.year_of_founded HAVING COUNT(T2.performance_id) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.year_of_founded FROM orchestra AS T1 INNER JOIN performance AS T2 ON T1.orchestra_id = T2.orchestra_id GROUP BY T1.year_of_founded HAVING COUNT(T2.performance_id) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(*) FROM highschooler
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.id) FROM highschooler AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, T1.grade FROM highschooler AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, T1.grade FROM highschooler AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.grade FROM highschooler AS T1 INNER JOIN highschooler AS T2 ON T1.id = T2.id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT grade FROM highschooler
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.grade FROM highschooler AS T1 INNER JOIN highschooler AS T2 ON T1.name = 'Kyle'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.grade FROM highschooler AS T1 INNER JOIN highschooler AS T2 ON T1.id = T2.id WHERE T1.name = 'Kyle'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id WHERE T1.grade = 10
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT name FROM highschooler WHERE grade = 10
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.id FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id WHERE T1.name = 'Kyle'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.id FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id WHERE T1.name = 'Kyle'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(*) FROM highschooler WHERE grade = 9 OR grade = 10
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.grade) FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id WHERE T1.grade BETWEEN 9 AND 10
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.grade, COUNT(T1.id) FROM highschooler AS T1 INNER JOIN highschooler AS T2 ON T1.grade = T2.grade GROUP BY T2.grade
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT grade FROM highschooler GROUP BY grade
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT grade FROM highschooler GROUP BY grade ORDER BY COUNT(grade) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT grade FROM highschooler GROUP BY grade ORDER BY COUNT(grade) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT grade FROM highschooler GROUP BY grade HAVING COUNT(name) >= 4
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.grade FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id GROUP BY T1.grade HAVING COUNT(T1.id) >= 4
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT student_id, COUNT(friend_id) FROM friend GROUP BY student_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, COUNT(T2.student_id) FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id GROUP BY T1.name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, COUNT(T2.student_id) FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id GROUP BY T1.name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT name FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id GROUP BY T1.name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id GROUP BY T1.name ORDER BY COUNT(T2.student_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT name FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id GROUP BY T1.name ORDER BY COUNT(T2.student_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id GROUP BY T1.name HAVING COUNT(T2.student_id) >= 3
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id GROUP BY T1.id HAVING COUNT(T2.friend_id) >= 3
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id WHERE T1.name = 'Kyle'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM friend AS T1 INNER JOIN highschooler AS T2 ON T1.student_id = T2.id WHERE T1.friend_id = 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T2.name) FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id WHERE T1.name = 'Kyle'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT SUM(CASE WHEN T2.name = 'Kyle' THEN 1 ELSE 0 END) FROM friend AS T1 INNER JOIN highschooler AS T2 ON T2.id = T1.friend_id WHERE T2.name = 'Kyle'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT id FROM highschooler EXCEPT SELECT T2.id FROM friend AS T1 INNER JOIN highschooler AS T2 ON T1.friend_id = T2.id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.id FROM highschooler AS T1 LEFT JOIN friend AS T2 ON T1.id = T2.student_id WHERE T2.student_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM friend AS T1 INNER JOIN highschooler AS T2 ON T1.student_id = T2.id WHERE T1.friend_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id WHERE T2.friend_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.id FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id WHERE T2.friend_id IN ( SELECT T3.id FROM highschooler AS T3 INNER JOIN likes AS T4 ON T3.id = T4.liked_id GROUP BY T4.liked_id HAVING COUNT(T4.liked_id) > 1 )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.id FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id INNER JOIN likes AS T3 ON T3.student_id = T2.student_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id INTERSECT SELECT T1.name FROM highschooler AS T1 INNER JOIN likes AS T2 ON T1.id = T2.liked_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id INNER JOIN likes AS T3 ON T1.id = T3.student_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.student_id FROM likes AS T1 INNER JOIN highschooler AS T2 ON T1.student_id = T2.id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.student_id, COUNT(T1.liked_id) FROM likes AS T1 GROUP BY T1.student_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM highschooler AS T1 INNER JOIN likes AS T2 ON T1.id = T2.student_id GROUP BY T1.name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, COUNT(T2.student_id) FROM highschooler AS T1 INNER JOIN likes AS T2 ON T1.id = T2.student_id GROUP BY T1.name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT name FROM highschooler WHERE id IN ( SELECT student_id FROM likes GROUP BY student_id ORDER BY COUNT(student_id) DESC LIMIT 1 )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM likes AS T1 INNER JOIN highschooler AS T2 ON T1.student_id = T2.id GROUP BY T2.name ORDER BY COUNT(T1.student_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM highschooler AS T1 INNER JOIN likes AS T2 ON T1.id = T2.student_id GROUP BY T1.name HAVING COUNT(T2.student_id) >= 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT name FROM highschooler AS T1 INNER JOIN likes AS T2 ON T1.id = T2.student_id GROUP BY T1.name HAVING COUNT(T2.student_id) >= 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id WHERE T1.grade > 5 GROUP BY T1.name HAVING COUNT(T2.student_id) >= 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id WHERE T1.grade > 5 GROUP BY T1.name HAVING COUNT(T2.student_id) = 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.liked_id) FROM likes AS T1 INNER JOIN highschooler AS T2 ON T1.student_id = T2.id WHERE T2.name = 'Kyle'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(liked_id) FROM likes AS T1 INNER JOIN highschooler AS T2 ON T1.liked_id = T2.id WHERE T2.name = 'Kyle'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T1.grade) FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T1.grade) FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.grade FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id WHERE T2.friend_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.grade FROM highschooler AS T1 INNER JOIN friend AS T2 ON T1.id = T2.student_id WHERE T2.student_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.state FROM owners AS T1 INTERSECT SELECT DISTINCT T1.state FROM professionals AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.state FROM owners AS T1 INNER JOIN professionals AS T2 ON T1.state = T2.state
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T1.age) FROM dogs AS T1 INNER JOIN treatments AS T2 ON T1.dog_id = T2.dog_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT AVG(T2.age) FROM treatments AS T1 INNER JOIN dogs AS T2 ON T2.dog_id = T1.dog_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.professional_id, T1.last_name, T1.cell_number FROM professionals AS T1 INNER JOIN treatments AS T2 ON T1.professional_id = T2.professional_id WHERE T1.state = 'Indiana'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.professional_id, T2.last_name, T2.cell_number FROM owners AS T1 INNER JOIN professionals AS T2 ON T1.owner_id = T2.professional_id WHERE T1.state = 'IN'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM dogs AS T1 INNER JOIN treatments AS T2 ON T1.dog_id = T2.dog_id WHERE T2.cost_of_treatment <= 1000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM dogs AS T1 INNER JOIN treatments AS T2 ON T1.dog_id = T2.dog_id WHERE T2.cost_of_treatment <= 1000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.first_name FROM owners AS T1 INNER JOIN professionals AS T2 ON T1.owner_id = T2.professional_id WHERE T1.first_name NOT IN (SELECT T3.first_name FROM dogs AS T3)
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.first_name FROM owners AS T1 INNER JOIN professionals AS T2 ON T1.owner_id = T2.professional_id WHERE T1.first_name NOT IN ( SELECT T3.first_name FROM dogs AS T3 )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.professional_id, T1.role_code, T1.email_address FROM professionals AS T1 INNER JOIN treatments AS T2 ON T1.professional_id = T2.professional_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.professional_id, T2.role_code, T2.email_address FROM professionals AS T1 INNER JOIN treatments AS T2 ON T1.professional_id = T2.professional_id WHERE T2.professional_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.owner_id, T1.first_name, T1.last_name FROM owners AS T1 INNER JOIN dogs AS T2 ON T1.owner_id = T2.owner_id GROUP BY T1.owner_id ORDER BY COUNT(T2.owner_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.owner_id, T1.first_name, T1.last_name FROM owners AS T1 INNER JOIN dogs AS T2 ON T1.owner_id = T2.owner_id GROUP BY T1.owner_id, T1.first_name, T1.last_name ORDER BY COUNT(T2.dog_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.professional_id, T1.role_code, T1.first_name FROM professionals AS T1 INNER JOIN treatments AS T2 ON T1.professional_id = T2.professional_id GROUP BY T1.professional_id HAVING COUNT(T1.professional_id) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.professional_id, T1.role_code, T1.first_name FROM professionals AS T1 INNER JOIN treatments AS T2 ON T1.professional_id = T2.professional_id GROUP BY T1.professional_id, T1.role_code, T1.first_name HAVING COUNT(T2.treatment_id) >= 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.breed_name FROM dogs AS T1 INNER JOIN breeds AS T2 ON T1.breed_code = T2.breed_code GROUP BY T2.breed_name ORDER BY COUNT(T1.dog_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.breed_name FROM breeds AS T1 INNER JOIN dogs AS T2 ON T1.breed_code = T2.breed_code GROUP BY T1.breed_name ORDER BY COUNT(T1.breed_name) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.owner_id, T1.last_name FROM owners AS T1 INNER JOIN dogs AS T2 ON T1.owner_id = T2.owner_id INNER JOIN treatments AS T3 ON T2.dog_id = T3.dog_id GROUP BY T2.owner_id ORDER BY COUNT(T3.treatment_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.owner_id, T1.last_name FROM owners AS T1 INNER JOIN dogs AS T2 ON T1.owner_id = T2.owner_id INNER JOIN treatments AS T3 ON T2.dog_id = T3.dog_id GROUP BY T1.owner_id ORDER BY SUM(T3.cost_of_treatment) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.treatment_type_description FROM treatment_types AS T1 INNER JOIN treatments AS T2 ON T1.treatment_type_code = T2.treatment_type_code GROUP BY T2.treatment_type_code ORDER BY SUM(T2.cost_of_treatment) ASC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.treatment_type_description FROM treatment_types AS T1 INNER JOIN treatments AS T2 ON T1.treatment_type_code = T2.treatment_type_code GROUP BY T2.treatment_type_code ORDER BY SUM(T2.cost_of_treatment) ASC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.owner_id, T1.zip_code FROM owners AS T1 INNER JOIN charges AS T2 ON T1.owner_id = T2.charge_id WHERE T2.charge_type = 'Adoption Fee' GROUP BY T1.owner_id, T1.zip_code ORDER BY SUM(T2.charge_amount) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.owner_id, T2.zip_code FROM ( SELECT T1.owner_id, SUM(T1.cost_of_treatment) AS total_spent FROM treatments AS T1 INNER JOIN dogs AS T2 ON T1.dog_id = T2.dog_id GROUP BY T1.owner_id ORDER BY total_spent DESC LIMIT 1 ) AS T1 INNER JOIN owners AS T2 ON T1.owner_id = T2.owner_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.professional_id, T1.cell_number FROM professionals AS T1 INNER JOIN treatments AS T2 ON T1.professional_id = T2.professional_id GROUP BY T1.professional_id, T1.cell_number HAVING COUNT(DISTINCT T2.treatment_type_code) >= 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.professional_id, T1.cell_number FROM professionals AS T1 INNER JOIN treatments AS T2 ON T1.professional_id = T2.professional_id GROUP BY T1.professional_id, T1.cell_number HAVING COUNT(T2.treatment_type_code) >= 2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.last_name FROM owners AS T1 INNER JOIN dogs AS T2 ON T1.owner_id = T2.owner_id INNER JOIN treatments AS T3 ON T2.dog_id = T3.dog_id WHERE T3.cost_of_treatment < ( SELECT AVG(cost_of_treatment) FROM treatments )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.last_name FROM professionals AS T1 INNER JOIN treatments AS T2 ON T1.professional_id = T2.professional_id WHERE T2.cost_of_treatment < ( SELECT AVG(cost_of_treatment) FROM treatments )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.date_of_treatment, T2.first_name FROM treatments AS T1 INNER JOIN professionals AS T2 ON T1.professional_id = T2.professional_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.date_of_treatment, T3.first_name FROM treatments AS T1 INNER JOIN dogs AS T2 ON T2.dog_id = T1.dog_id INNER JOIN professionals AS T3 ON T3.professional_id = T1.professional_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.cost_of_treatment, T2.treatment_type_description FROM treatments AS T1 INNER JOIN treatment_types AS T2 ON T1.treatment_type_code = T2.treatment_type_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.cost_of_treatment, T2.treatment_type_description FROM treatments AS T1 INNER JOIN treatment_types AS T2 ON T1.treatment_type_code = T2.treatment_type_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.last_name, T2.size_description FROM owners AS T1 INNER JOIN dogs AS T2 ON T1.owner_id = T2.owner_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.last_name, T3.size_description FROM owners AS T1 INNER JOIN dogs AS T2 ON T1.owner_id = T2.owner_id INNER JOIN sizes AS T3 ON T2.size_code = T3.size_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T2.name FROM owners AS T1 INNER JOIN dogs AS T2 ON T1.owner_id = T2.owner_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T3.name FROM owners AS T1 INNER JOIN dogs AS T2 ON T1.owner_id = T2.owner_id INNER JOIN breeds AS T3 ON T2.breed_code = T3.breed_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM dogs AS T1 INNER JOIN breeds AS T2 ON T1.breed_code = T2.breed_code ORDER BY T2.breed_name DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM dogs AS T1 INNER JOIN breeds AS T2 ON T1.breed_code = T2.breed_code WHERE T2.breed_name = 'Rare Breed'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T2.name FROM owners AS T1 INNER JOIN dogs AS T2 ON T1.owner_id = T2.owner_id WHERE T1.state = 'VA'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name FROM owners AS T1 INNER JOIN dogs AS T2 ON T1.owner_id = T2.owner_id WHERE T1.state = 'VA'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.date_arrived, T1.date_departed FROM dogs AS T1 INNER JOIN treatments AS T2 ON T1.dog_id = T2.dog_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.date_arrived, T2.date_departed FROM dogs AS T1 INNER JOIN treatments AS T2 ON T1.dog_id = T2.dog_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.last_name FROM owners AS T1 INNER JOIN dogs AS T2 ON T1.owner_id = T2.owner_id ORDER BY T2.age LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.last_name FROM owners AS T1 INNER JOIN dogs AS T2 ON T1.owner_id = T2.owner_id ORDER BY T2.date_of_birth DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.email_address FROM professionals AS T1 INNER JOIN state AS T2 ON T1.state = T2.state WHERE T2.state IN ('HI', 'WI')
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.email_address FROM professionals AS T1 INNER JOIN owners AS T2 ON T1.professional_id = T2.owner_id WHERE T2.state = 'HI' OR T2.state = 'WI'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.date_arrived FROM owners AS T1 INNER JOIN dogs AS T2 ON T1.owner_id = T2.owner_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.date_arrived FROM dogs AS T1 LEFT JOIN dogs AS T2 ON T1.dog_id = T2.dog_id WHERE T2.date_departed IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.dog_id) FROM treatments AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T2.dog_id) FROM dogs AS T1 INNER JOIN treatments AS T2 ON T1.dog_id = T2.dog_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.professional_id) FROM treatments AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(DISTINCT T1.professional_id) FROM professionals AS T1 INNER JOIN treatments AS T2 ON T1.professional_id = T2.professional_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.role_code, T1.street, T1.city, T1.state FROM professionals AS T1 INNER JOIN `city` AS T2 ON T1.city = T2.city WHERE T2.city LIKE '%West%'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.role_code, T2.street, T2.city, T2.state FROM professionals AS T1 INNER JOIN professionals AS T2 ON T1.zip_code = T2.zip_code WHERE T1.city LIKE '%West%'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.last_name, T1.email_address FROM owners AS T1 INNER JOIN dog_kennels.dog_kennels.owners AS T2 ON T1.owner_id = T2.owner_id WHERE T2.state LIKE '%North%'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T1.last_name, T1.email_address FROM owners AS T1 INNER JOIN dogs AS T2 ON T1.owner_id = T2.owner_id WHERE T1.state LIKE '%North%'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(dog_id) FROM dogs WHERE STRFTIME('%Y', date_of_birth) < ( SELECT STRFTIME('%Y', date_of_birth) FROM dogs GROUP BY date_of_birth ORDER BY COUNT(date_of_birth) DESC LIMIT 1 )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(dog_id) FROM dogs WHERE STRFTIME('%J', date_of_birth) < ( SELECT AVG(STRFTIME('%J', date_of_birth)) FROM dogs )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MAX(T1.cost_of_treatment) FROM treatments AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MAX(cost_of_treatment) FROM treatments
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(dog_id) FROM dogs WHERE dog_id NOT IN ( SELECT dog_id FROM treatments )
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.dog_id) FROM dogs AS T1 LEFT JOIN treatments AS T2 ON T1.dog_id = T2.dog_id WHERE T2.dog_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(owner_id) FROM owners WHERE owner_id NOT IN (SELECT owner_id FROM dogs)
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(owner_id) FROM owners WHERE owner_id NOT IN (SELECT owner_id FROM dogs)
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(professional_id) FROM professionals EXCEPT SELECT T2.professional_id FROM treatments AS T1 INNER JOIN professionals AS T2 ON T1.professional_id = T2.professional_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.professional_id) FROM professionals AS T1 LEFT JOIN treatments AS T2 ON T1.professional_id = T2.professional_id WHERE T2.professional_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, T2.age, T2.weight FROM breeds AS T1 INNER JOIN dogs AS T2 ON T1.breed_code = T2.breed_code WHERE T2.abandoned_yn = '1'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, T1.age, T1.weight FROM dogs AS T1 INNER JOIN sizes AS T2 ON T1.size_code = T2.size_code WHERE T1.abandoned_yn = '1'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT CAST(SUM(T2.age) AS REAL) / COUNT(T2.dog_id) FROM dogs AS T2
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT CAST(SUM(CAST(REPLACE(SUBSTR(T2.age, 1, INSTR(T2.age, '-') - 1), 'years', '') AS REAL)) + 0) AS REAL) / COUNT(T2.dog_id) FROM dogs AS T2 INNER JOIN breeds AS T3 ON T2.breed_code = T3.breed_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.age FROM breeds AS T1 INNER JOIN dogs AS T2 ON T1.breed_code = T2.breed_code ORDER BY T2.age DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT MAX(T1.age) FROM dogs AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.charge_type, T1.charge_amount FROM charges AS T1 GROUP BY T1.charge_type
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.charge_type, T1.charge_amount FROM charges AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.charge_amount FROM charges AS T1 INNER JOIN ( SELECT charge_type, MAX(charge_amount) AS max_charge_amount FROM charges GROUP BY charge_type ) AS T2 ON T1.charge_type = T2.charge_type WHERE T1.charge_amount = T2.max_charge_amount
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.charge_amount FROM charges AS T1 INNER JOIN ( SELECT charge_type, MAX(charge_amount) AS max_charge_amount FROM charges GROUP BY charge_type ) AS T2 ON T1.charge_type = T2.charge_type AND T1.charge_amount = T2.max_charge_amount
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT email_address, cell_number, home_phone FROM professionals
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT email_address FROM professionals
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.breed_name, T2.size_description FROM breeds AS T1 INNER JOIN sizes AS T2 ON T1.breed_code = T2.size_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.breed_name, T3.size_description FROM breeds AS T1 INNER JOIN dogs AS T2 ON T1.breed_code = T2.breed_code INNER JOIN sizes AS T3 ON T2.size_code = T3.size_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name FROM professionals AS T1 INNER JOIN treatments AS T2 ON T1.professional_id = T2.professional_id INNER JOIN treatment_types AS T3 ON T3.treatment_type_code = T2.treatment_type_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.first_name, T2.treatment_type_description FROM professionals AS T1 INNER JOIN treatment_types AS T2 ON T1.professional_id = T2.treatment_type_code
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(*) FROM singer
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(name) FROM singer
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM singer AS T1 INNER JOIN song AS T2 ON T1.singer_id = T2.singer_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT name FROM singer ORDER BY net_worth_millions
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T1.birth_year, T1.citizenship FROM singer AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.birth_year, T1.citizenship FROM singer AS T1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT name FROM singer WHERE citizenship!= 'France'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM singer AS T1 INNER JOIN song AS T2 ON T1.singer_id = T2.singer_id WHERE T1.citizenship!= 'French'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM singer AS T1 INNER JOIN song AS T2 ON T1.singer_id = T2.singer_id WHERE T1.birth_year = 1948 OR T1.birth_year = 1949
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM singer AS T1 INNER JOIN song AS T2 ON T1.singer_id = T2.singer_id WHERE T1.birth_year = 1948
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM song AS T1 INNER JOIN singer AS T2 ON T1.singer_id = T2.singer_id ORDER BY T2.net_worth_millions DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM song AS T1 INNER JOIN singer AS T2 ON T1.singer_id = T2.singer_id ORDER BY T2.net_worth_millions DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.citizenship, COUNT(T2.citizenship) FROM song AS T1 INNER JOIN singer AS T2 ON T1.singer_id = T2.singer_id GROUP BY T2.citizenship
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(T1.citizenship) FROM singer AS T1 GROUP BY T1.citizenship
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.citizenship FROM song AS T1 INNER JOIN singer AS T2 ON T1.singer_id = T2.singer_id GROUP BY T2.citizenship ORDER BY COUNT(T1.singer_id) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.citizenship FROM song AS T1 INNER JOIN singer AS T2 ON T1.singer_id = T2.singer_id GROUP BY T2.citizenship ORDER BY COUNT(T2.citizenship) DESC LIMIT 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.citizenship, MAX(T2.net_worth_millions) FROM singer AS T1 INNER JOIN singer AS T2 ON T1.citizenship = T2.citizenship GROUP BY T1.citizenship
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.citizenship, MAX(T1.net_worth_millions) FROM singer AS T1 INNER JOIN song AS T2 ON T1.singer_id = T2.singer_id GROUP BY T2.citizenship
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.title, T2.name FROM song AS T1 INNER JOIN singer AS T2 ON T1.singer_id = T2.singer_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.title FROM song AS T1 INNER JOIN singer AS T2 ON T1.singer_id = T2.singer_id
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.name FROM song AS T1 INNER JOIN singer AS T2 ON T1.singer_id = T2.singer_id WHERE T1.sales > 300000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.name FROM song AS T1 INNER JOIN singer AS T2 ON T1.singer_id = T2.singer_id WHERE T1.sales > 300000
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM song AS T1 INNER JOIN singer AS T2 ON T1.singer_id = T2.singer_id GROUP BY T2.name HAVING COUNT(T2.name) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name FROM song AS T1 INNER JOIN singer AS T2 ON T1.singer_id = T2.singer_id GROUP BY T2.name HAVING COUNT(T1.song_id) > 1
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name, SUM(T2.sales) FROM singer AS T1 INNER JOIN song AS T2 ON T1.singer_id = T2.singer_id GROUP BY T1.name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.name, SUM(T1.sales) FROM song AS T1 INNER JOIN singer AS T2 ON T1.singer_id = T2.singer_id GROUP BY T2.name
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.name FROM singer AS T1 LEFT JOIN song AS T2 ON T1.singer_id = T2.singer_id WHERE T2.song_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT DISTINCT T2.name FROM song AS T1 LEFT JOIN singer AS T2 ON T1.singer_id = T2.singer_id WHERE T1.song_id IS NULL
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.citizenship FROM singer AS T1 INNER JOIN singer AS T2 ON T1.citizenship = T2.citizenship WHERE T1.birth_year < 1945 AND T1.birth_year > 1955
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.citizenship FROM singer AS T1 INNER JOIN singer AS T2 ON T1.citizenship = T2.citizenship WHERE T1.birth_year < 1945 AND T1.birth_year > 1955
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT COUNT(feature_id) FROM other_available_features
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T2.feature_type_name FROM other_available_features AS T1 INNER JOIN ref_feature_types AS T2 ON T1.feature_type_code = T2.feature_type_code WHERE T1.feature_name = 'AirCon'
-Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
 SELECT T1.property_type_description FROM ref_property_types AS T1 INNER JOIN properties AS T2 ON T1.property_type_code = T2.property_type_code
 SELECT T2.property_name FROM ref_property_types AS T1 INNER JOIN properties AS T2 ON T1.property_type_code = T2.property_type_code WHERE T1.property_type_description = 'House' OR T1.property_type_description = 'Apartment' AND T2.room_count > 1
