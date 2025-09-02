@@ -37,6 +37,8 @@ python entrypoint.py \
 - `--log_resultsets`: (optional) Optional flag to log query result sets (only for execution-based evaluation)
 
 The script will generate CSV results, metadata, schema statistics, and visualizations in the output directory. Examples are shown by folders 'testing_dir' (for exec) and 'testing_dir_2' (for component-based). The last two arguments are only needed for exec-based evaluation.
+
+Demos to show how to use both evaluation types is here:
 [View Presentation Slide](https://docs.google.com/presentation/d/1DIgrEhdu_IJCZ1LxBYdYS7gQEtuMUI2XHJrlj4Ph6Cs/edit?slide=id.g36516937edd_0_197#slide=id.g36516937edd_0_197)
 
 ## Tag Gold Queries with Metadata
