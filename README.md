@@ -17,12 +17,12 @@ You can specify a directory (`output_dir`) to store all contents created by runn
 ## Usage:
 
 ```bash
-python run_evaluation.py \
+python entrypoint.py \
     --eval_type <exec|component> \
     --input_dataset <path_to_dataset.csv> \
     --output_dir <output_directory> \
     --db_dir <database_directory_or_postgres_credentials> \
-    [--engine <sqlite|postgres>] \
+    [--engine <sqlite|postgres>] \ # only for exec
     [--log_resultsets]  # optional, only for exec
 ```
 
@@ -55,10 +55,10 @@ python tag_features.py \
 This will generate a file where each row includes the gold query, its tokens, query hardness (check hardness.txt for a detailed breakdown), and other SQL features. You can also use `query_complexity.py` to extract metadata for a single query string. 
 
 ## Execution Accuracy (itself)
-If you alternatively want to just run the execution accuracy on your dataset without a stratified analysis, you can run the `execution_evaluate.py` function as is:
+If you alternatively want to just run the execution accuracy on your dataset without a stratified analysis, you can run `execution_evaluate.py` as is:
 
 ```python
-python evaluate_execution_per_example.py \
+python execution_evaluate.py \
     --input_dataset <path_to_dataset.csv> \
     --db_dir <database_directory_or_postgres_credentials> \
     --engine <sqlite|postgres> \
